@@ -166,11 +166,14 @@ describe("HelpRequestForm tests", () => {
         <HelpRequestForm submitAction={mockSubmitAction} />
       </Router>,
     );
+
+    await screen.findByTestId("HelpRequestForm-requesterEmail");
     const requesterEmailField = screen.getByTestId("HelpRequestForm-requesterEmail");
     const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
     const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
     const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
+    const solvedField = screen.getByTestId("HelpRequestForm-solved");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
   
     fireEvent.change(tableOrBreakoutRoomField, { target: { value: input } });
@@ -178,6 +181,7 @@ describe("HelpRequestForm tests", () => {
     fireEvent.change(teamIdField, { target: { value: "s25-06" } });
     fireEvent.change(requestTimeField, { target: { value: "2024-01-02T12:00" } });
     fireEvent.change(explanationField, { target: { value: "This is a test explanation." } });
+    fireEvent.click(solvedField);
     fireEvent.click(submitButton);
   
     if (isValid) {
