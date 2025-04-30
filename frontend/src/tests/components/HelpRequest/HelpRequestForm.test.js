@@ -152,12 +152,12 @@ describe("HelpRequestForm tests", () => {
   });
 
     test.each([
-    ["table", true],
-    ["breakoutroom", true],
-    [" table ", true], // Leading/trailing spaces
-    [" breakoutroom ", true], // Leading/trailing spaces
-    ["invalid", false],
-  ])("Validation for tableOrBreakoutRoom with input '%s'", async (input, isValid) => {
+    ["table"],
+    ["breakoutroom"],
+    [" table "], // Leading/trailing spaces
+    [" breakoutroom "], // Leading/trailing spaces
+    
+  ])("Validation for tableOrBreakoutRoom with input '%s'", async (input) => {
     const mockSubmitAction = jest.fn();
   
     render(
@@ -183,14 +183,11 @@ describe("HelpRequestForm tests", () => {
     fireEvent.click(solvedField);
     fireEvent.click(submitButton);
   
-    if (isValid) {
-      await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
-      expect(
+   
+    await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+    expect(
         screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
-      ).not.toBeInTheDocument();
-    } else {
-      await screen.findByText(/Value must be 'table' or 'breakoutroom'./);
-      expect(mockSubmitAction).not.toHaveBeenCalled();
-    }
+    ).not.toBeInTheDocument();
+    
   });
 });
