@@ -1,26 +1,26 @@
 const ucsbDiningCommonsMenuItemFixtures = {
   oneItem: {
     id: 1,
-    diningCommonsCode: "ortega",
+    diningCommonsCode: "Ortega",
     name: "chicken burrito",
     station: "burrito bar",
   },
   threeItems: [
     {
       id: 1,
-      diningCommonsCode: "portola",
+      diningCommonsCode: "Portola",
       name: "chocolate milk",
       station: "beverages",
     },
     {
       id: 2,
-      diningCommonsCode: "carillo",
+      diningCommonsCode: "Carillo",
       name: "salad",
       station: "salad bar",
     },
     {
       id: 3,
-      diningCommonsCode: "ortega",
+      diningCommonsCode: "De La Guerra",
       name: "vanilla ice cream",
       station: "ice cream machine",
     },
