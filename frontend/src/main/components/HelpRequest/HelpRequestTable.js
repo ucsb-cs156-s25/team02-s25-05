@@ -49,9 +49,9 @@ export default function HelpRequestTable({
       accessor: "teamId",
     },
     {
-        Header: "Table Or Breakout Room",
-        accessor: "tableOrBreakoutRoom",
-      },
+      Header: "Table Or Breakout Room",
+      accessor: "tableOrBreakoutRoom",
+    },
     {
       Header: "Request Time",
       accessor: "requestTime",
@@ -61,10 +61,9 @@ export default function HelpRequestTable({
       accessor: "explanation",
     },
     {
-        Header: "Solved",
-        accessor: "solved",
-    }
-   
+      Header: "Solved",
+      accessor: "solved",
+    },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {

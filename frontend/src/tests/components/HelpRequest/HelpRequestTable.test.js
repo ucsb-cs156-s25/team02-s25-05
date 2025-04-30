@@ -17,8 +17,24 @@ jest.mock("react-router-dom", () => ({
 describe("HelpRequest tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Requester Email", "Team Id", "Table Or Breakout Room", "Request Time", "Explanation", "Solved"];
-  const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "requestTime", "explanation", "solved"];
+  const expectedHeaders = [
+    "id",
+    "Requester Email",
+    "Team Id",
+    "Table Or Breakout Room",
+    "Request Time",
+    "Explanation",
+    "Solved",
+  ];
+  const expectedFields = [
+    "id",
+    "requesterEmail",
+    "teamId",
+    "tableOrBreakoutRoom",
+    "requestTime",
+    "explanation",
+    "solved",
+  ];
   const testId = "HelpRequestTable";
 
   test("renders empty table correctly", () => {
@@ -193,7 +209,6 @@ describe("HelpRequest tests", () => {
     axiosMock
       .onDelete("/api/helprequest")
       .reply(200, { message: "HelpRequest deleted" });
-      
 
     // act - render the component
     render(
