@@ -145,7 +145,9 @@ describe("HelpRequestForm tests", () => {
 
     expect(
       screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
-      screen.queryByText(/Comments must be less than 255 characters./),
+    ).not.toBeInTheDocument();
+    expect(
+        screen.queryByText(/Comments must be less than 255 characters./),
     ).not.toBeInTheDocument();
   });
 
