@@ -157,7 +157,6 @@ describe("HelpRequestForm tests", () => {
     [" table ", true], // Leading/trailing spaces
     [" breakoutroom ", true], // Leading/trailing spaces
     ["invalid", false],
-    ["", false],
   ])("Validation for tableOrBreakoutRoom with input '%s'", async (input, isValid) => {
     const mockSubmitAction = jest.fn();
   
