@@ -27,7 +27,7 @@ const menuItemReviewFixtures = {
     {
       id: 3,
       itemId: 9,
-      reviewerEmail: "cgaucho3@ucsb.edu",
+      reviewerEmail: "cgaucho4@ucsb.edu",
       stars: 5,
       dateReviewed: "2022-07-04T12:00:00",
       comments: "third review",
