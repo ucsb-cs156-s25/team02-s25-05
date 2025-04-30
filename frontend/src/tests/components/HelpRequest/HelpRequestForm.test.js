@@ -16,7 +16,14 @@ jest.mock("react-router-dom", () => ({
 describe("HelpRequestForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Requester Email", "Team Id","Table Or Breakout Room", "Request Time", "Explanation", "Solved"];
+  const expectedHeaders = [
+    "Requester Email",
+    "Team Id",
+    "Table Or Breakout Room",
+    "Request Time",
+    "Explanation",
+    "Solved",
+  ];
   const testId = "HelpRequestForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -40,7 +47,9 @@ describe("HelpRequestForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <HelpRequestForm initialContents={helpRequestFixtures.oneHelpRequest} />
+          <HelpRequestForm
+            initialContents={helpRequestFixtures.oneHelpRequest}
+          />
         </Router>
       </QueryClientProvider>,
     );
@@ -79,12 +88,16 @@ describe("HelpRequestForm tests", () => {
       </Router>,
     );
     await screen.findByTestId("HelpRequestForm-tableOrBreakoutRoom");
-    const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
+    const tableOrBreakoutRoomField = screen.getByTestId(
+      "HelpRequestForm-tableOrBreakoutRoom",
+    );
     const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
     const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-    fireEvent.change(tableOrBreakoutRoomField, { target: { value: "bad-input" } });
+    fireEvent.change(tableOrBreakoutRoomField, {
+      target: { value: "bad-input" },
+    });
     fireEvent.change(requestTimeField, { target: { value: "bad-input" } });
     const longText = "a".repeat(256);
     fireEvent.change(explanationField, { target: { value: longText } });
@@ -92,7 +105,6 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Value must be 'table' or 'breakoutroom'./);
     await screen.findByText(/Comments must be less than 255 characters./);
-
   });
 
   test("Correct Error messages on missing input", async () => {
@@ -108,7 +120,9 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Requester Email is required./);
     expect(screen.getByText(/TeamId is required./)).toBeInTheDocument();
-    expect(screen.getByText(/Table Or Breakout Room is required./)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Table Or Breakout Room is required./),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Request Time is required./)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
   });
@@ -123,22 +137,30 @@ describe("HelpRequestForm tests", () => {
     );
     await screen.findByTestId("HelpRequestForm-requesterEmail");
 
-    const requesterEmailField = screen.getByTestId("HelpRequestForm-requesterEmail");
+    const requesterEmailField = screen.getByTestId(
+      "HelpRequestForm-requesterEmail",
+    );
     const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
-    const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
+    const tableOrBreakoutRoomField = screen.getByTestId(
+      "HelpRequestForm-tableOrBreakoutRoom",
+    );
     const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
     const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const solvedField = screen.getByTestId("HelpRequestForm-solved");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-    fireEvent.change(requesterEmailField, { target: { value: "awinz@ucsb.edu" } });
+    fireEvent.change(requesterEmailField, {
+      target: { value: "awinz@ucsb.edu" },
+    });
     fireEvent.change(teamIdField, { target: { value: "s25-06" } });
     fireEvent.change(tableOrBreakoutRoomField, { target: { value: "table" } });
     fireEvent.change(requestTimeField, {
       target: { value: "2024-01-02T12:00" },
     });
-    fireEvent.change(explanationField, { target: { value: "Need help with something." } });
-    fireEvent.click(solvedField)
+    fireEvent.change(explanationField, {
+      target: { value: "Need help with something." },
+    });
+    fireEvent.click(solvedField);
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
@@ -147,19 +169,18 @@ describe("HelpRequestForm tests", () => {
       screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
     ).not.toBeInTheDocument();
     expect(
-        screen.queryByText(/Comments must be less than 255 characters./),
+      screen.queryByText(/Comments must be less than 255 characters./),
     ).not.toBeInTheDocument();
   });
 
-    test.each([
+  test.each([
     ["table"],
     ["breakoutroom"],
     [" table "], // Leading/trailing spaces
     [" breakoutroom "], // Leading/trailing spaces
-    
   ])("Validation for tableOrBreakoutRoom with input '%s'", async (input) => {
     const mockSubmitAction = jest.fn();
-  
+
     render(
       <Router>
         <HelpRequestForm submitAction={mockSubmitAction} />
@@ -167,27 +188,35 @@ describe("HelpRequestForm tests", () => {
     );
 
     await screen.findByTestId("HelpRequestForm-requesterEmail");
-    const requesterEmailField = screen.getByTestId("HelpRequestForm-requesterEmail");
+    const requesterEmailField = screen.getByTestId(
+      "HelpRequestForm-requesterEmail",
+    );
     const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
     const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
     const explanationField = screen.getByTestId("HelpRequestForm-explanation");
-    const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
+    const tableOrBreakoutRoomField = screen.getByTestId(
+      "HelpRequestForm-tableOrBreakoutRoom",
+    );
     const solvedField = screen.getByTestId("HelpRequestForm-solved");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
-  
+
     fireEvent.change(tableOrBreakoutRoomField, { target: { value: input } });
-    fireEvent.change(requesterEmailField, { target: { value: "test@example.com" } });
+    fireEvent.change(requesterEmailField, {
+      target: { value: "test@example.com" },
+    });
     fireEvent.change(teamIdField, { target: { value: "s25-06" } });
-    fireEvent.change(requestTimeField, { target: { value: "2024-01-02T12:00" } });
-    fireEvent.change(explanationField, { target: { value: "This is a test explanation." } });
+    fireEvent.change(requestTimeField, {
+      target: { value: "2024-01-02T12:00" },
+    });
+    fireEvent.change(explanationField, {
+      target: { value: "This is a test explanation." },
+    });
     fireEvent.click(solvedField);
     fireEvent.click(submitButton);
-  
-   
+
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
     expect(
-        screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
+      screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
     ).not.toBeInTheDocument();
-    
   });
 });
