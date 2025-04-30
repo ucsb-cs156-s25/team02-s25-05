@@ -15,20 +15,20 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     render(
       <Router>
         <UCSBDiningCommonsMenuItemForm />
-      </Router>
+      </Router>,
     );
     await screen.findByText(/Create/);
     expect(
-      screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode")
+      screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode"),
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("UCSBDiningCommonsMenuItemForm-name")
+      screen.getByTestId("UCSBDiningCommonsMenuItemForm-name"),
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("UCSBDiningCommonsMenuItemForm-station")
+      screen.getByTestId("UCSBDiningCommonsMenuItemForm-station"),
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit")
+      screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit"),
     ).toBeInTheDocument();
   });
 
@@ -38,12 +38,12 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <UCSBDiningCommonsMenuItemForm
           initialContents={ucsbDiningCommonsMenuItemFixtures.oneItem}
         />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId(/UCSBDiningCommonsMenuItemForm-id/);
     expect(screen.getByText(/Id/)).toBeInTheDocument();
     expect(screen.getByTestId(/UCSBDiningCommonsMenuItemForm-id/)).toHaveValue(
-      "1"
+      "1",
     );
   });
 
@@ -51,18 +51,18 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     render(
       <Router>
         <UCSBDiningCommonsMenuItemForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId(
-      "UCSBDiningCommonsMenuItemForm-diningCommonsCode"
+      "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
     );
     const diningCommonsCode = screen.getByTestId(
-      "UCSBDiningCommonsMenuItemForm-diningCommonsCode"
+      "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
     );
     const itemName = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
     const station = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
     const submitButton = screen.getByTestId(
-      "UCSBDiningCommonsMenuItemForm-submit"
+      "UCSBDiningCommonsMenuItemForm-submit",
     );
 
     fireEvent.change(diningCommonsCode, { target: { value: "bad-input" } });
@@ -88,11 +88,11 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     render(
       <Router>
         <UCSBDiningCommonsMenuItemForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("UCSBDiningCommonsMenuItemForm-submit");
     const submitButton = screen.getByTestId(
-      "UCSBDiningCommonsMenuItemForm-submit"
+      "UCSBDiningCommonsMenuItemForm-submit",
     );
 
     fireEvent.click(submitButton);
@@ -107,19 +107,19 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     render(
       <Router>
         <UCSBDiningCommonsMenuItemForm submitAction={mockSubmitAction} />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId(
-      "UCSBDiningCommonsMenuItemForm-diningCommonsCode"
+      "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
     );
 
     const diningCommonsCode = screen.getByTestId(
-      "UCSBDiningCommonsMenuItemForm-diningCommonsCode"
+      "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
     );
     const itemName = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
     const station = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
     const submitButton = screen.getByTestId(
-      "UCSBDiningCommonsMenuItemForm-submit"
+      "UCSBDiningCommonsMenuItemForm-submit",
     );
 
     fireEvent.change(diningCommonsCode, { target: { value: "Portola" } });
@@ -132,14 +132,14 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
     expect(
-      screen.queryByText(/Select a dining commons./)
+      screen.queryByText(/Select a dining commons./),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/Item name is required./)
+      screen.queryByText(/Item name is required./),
     ).not.toBeInTheDocument();
     expect(screen.queryByText(/Station is required./)).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/Max length 30 characters/)
+      screen.queryByText(/Max length 30 characters/),
     ).not.toBeInTheDocument();
   });
 
@@ -147,11 +147,11 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     render(
       <Router>
         <UCSBDiningCommonsMenuItemForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("UCSBDiningCommonsMenuItemForm-cancel");
     const cancelButton = screen.getByTestId(
-      "UCSBDiningCommonsMenuItemForm-cancel"
+      "UCSBDiningCommonsMenuItemForm-cancel",
     );
 
     fireEvent.click(cancelButton);
