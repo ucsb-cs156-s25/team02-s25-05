@@ -25,7 +25,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -40,9 +40,11 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <UCSBDiningCommonsMenuItemForm initialContents={ucsbDiningCommonsMenuItemFixtures.oneItem} />
+          <UCSBDiningCommonsMenuItemForm
+            initialContents={ucsbDiningCommonsMenuItemFixtures.oneItem}
+          />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -62,7 +64,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
     expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
     const cancelButton = screen.getByTestId(`${testId}-cancel`);
@@ -78,7 +80,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         <Router>
           <UCSBDiningCommonsMenuItemForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
