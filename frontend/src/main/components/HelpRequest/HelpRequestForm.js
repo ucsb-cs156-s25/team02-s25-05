@@ -73,7 +73,9 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="tableOrBreakoutRoom">Table Or Breakout Room</Form.Label>
+        <Form.Label htmlFor="tableOrBreakoutRoom">
+          Table Or Breakout Room
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
           id="tableOrBreakoutRoom"
@@ -82,13 +84,13 @@ function HelpRequestForm({
           {...register("tableOrBreakoutRoom", {
             required: "Table Or Breakout Room is required.",
             validate: (value) => {
-                const normalizedValue = value.trim().toLowerCase();
-                return (
-                  normalizedValue === "table" ||
-                  normalizedValue === "breakoutroom" ||
-                  "Value must be 'table' or 'breakoutroom'."
-                );
-              },
+              const normalizedValue = value.trim().toLowerCase();
+              return (
+                normalizedValue === "table" ||
+                normalizedValue === "breakoutroom" ||
+                "Value must be 'table' or 'breakoutroom'."
+              );
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -97,21 +99,21 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-            <Form.Label htmlFor="requestTime">Request Time</Form.Label>
-            <Form.Control
-              data-testid={testIdPrefix + "-requestTime"}
-              id="requestTime"
-              type="datetime-local"
-              isInvalid={Boolean(errors.requestTime)}
-              {...register("requestTime", {
-                required: true,
-                pattern: isodate_regex,
-              })}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.requestTime && "Request Time is required. "}
-            </Form.Control.Feedback>
-          </Form.Group>
+        <Form.Label htmlFor="requestTime">Request Time</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-requestTime"}
+          id="requestTime"
+          type="datetime-local"
+          isInvalid={Boolean(errors.requestTime)}
+          {...register("requestTime", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.requestTime && "Request Time is required. "}
+        </Form.Control.Feedback>
+      </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
@@ -123,9 +125,9 @@ function HelpRequestForm({
           {...register("explanation", {
             required: "Explanation is required.",
             maxLength: {
-                value: 255,
-                message: "Comments must be less than 255 characters.",
-              },
+              value: 255,
+              message: "Comments must be less than 255 characters.",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -135,12 +137,12 @@ function HelpRequestForm({
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="solved">Solved</Form.Label>
-          
+
         <Form.Check
           data-testid={testIdPrefix + "-solved"}
           type="checkbox"
           id="solved"
-          {...register("solved",)}
+          {...register("solved")}
         />
       </Form.Group>
 
