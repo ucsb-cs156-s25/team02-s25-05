@@ -91,8 +91,12 @@ describe("HelpRequest tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-solved`)).toHaveTextContent("Yes");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-solved`)).toHaveTextContent("No");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-solved`),
+    ).toHaveTextContent("Yes");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-solved`),
+    ).toHaveTextContent("No");
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
       "2",
@@ -162,8 +166,12 @@ describe("HelpRequest tests", () => {
       screen.getByTestId(`${testId}-cell-row-1-col-requesterEmail`),
     ).toHaveTextContent("awinz@ucsb.edu");
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-solved`)).toHaveTextContent("Yes");
-  expect(screen.getByTestId(`${testId}-cell-row-2-col-solved`)).toHaveTextContent("No");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-solved`),
+    ).toHaveTextContent("Yes");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-solved`),
+    ).toHaveTextContent("No");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -249,5 +257,4 @@ describe("HelpRequest tests", () => {
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
   });
-
 });
