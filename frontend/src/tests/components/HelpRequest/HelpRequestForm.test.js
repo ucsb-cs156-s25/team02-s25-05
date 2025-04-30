@@ -81,13 +81,18 @@ describe("HelpRequestForm tests", () => {
     await screen.findByTestId("HelpRequestForm-tableOrBreakoutRoom");
     const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
     const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
+    const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
     fireEvent.change(tableOrBreakoutRoomField, { target: { value: "bad-input" } });
     fireEvent.change(requestTimeField, { target: { value: "bad-input" } });
+    const longText = "a".repeat(256);
+    fireEvent.change(explanationField, { target: { value: longText } });
     fireEvent.click(submitButton);
 
     await screen.findByText(/Value must be 'table' or 'breakoutroom'./);
+    await screen.findByText(/Comments must be less than 255 characters./);
+
   });
 
   test("Correct Error messages on missing input", async () => {
@@ -140,6 +145,40 @@ describe("HelpRequestForm tests", () => {
 
     expect(
       screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
+      screen.queryByText(/Comments must be less than 255 characters./),
     ).not.toBeInTheDocument();
+  });
+
+    test.each([
+    ["table", true],
+    ["breakoutroom", true],
+    [" table ", true], // Leading/trailing spaces
+    [" breakoutroom ", true], // Leading/trailing spaces
+    ["invalid", false],
+    ["", false],
+  ])("Validation for tableOrBreakoutRoom with input '%s'", async (input, isValid) => {
+    const mockSubmitAction = jest.fn();
+  
+    render(
+      <Router>
+        <HelpRequestForm submitAction={mockSubmitAction} />
+      </Router>,
+    );
+  
+    const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
+    const submitButton = screen.getByTestId("HelpRequestForm-submit");
+  
+    fireEvent.change(tableOrBreakoutRoomField, { target: { value: input } });
+    fireEvent.click(submitButton);
+  
+    if (isValid) {
+      await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+      expect(
+        screen.queryByText(/Value must be 'table' or 'breakoutroom'./),
+      ).not.toBeInTheDocument();
+    } else {
+      await screen.findByText(/Value must be 'table' or 'breakoutroom'./);
+      expect(mockSubmitAction).not.toHaveBeenCalled();
+    }
   });
 });
