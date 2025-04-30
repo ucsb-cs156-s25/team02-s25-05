@@ -66,7 +66,7 @@ function UCSBDiningCommonsMenuItemForm({
             required: "Item name is required.",
             maxLength: {
               value: 30,
-              message: "Max length 30 characters",
+              message: "Max length 30 characters.",
             },
           })}
         />
@@ -86,7 +86,7 @@ function UCSBDiningCommonsMenuItemForm({
             required: "Station is required.",
             maxLength: {
               value: 30,
-              message: "Max length 30 characters",
+              message: "Max length 30 characters.",
             },
           })}
         />
