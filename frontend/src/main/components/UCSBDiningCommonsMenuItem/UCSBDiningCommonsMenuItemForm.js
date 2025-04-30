@@ -83,7 +83,7 @@ function UCSBDiningCommonsMenuItemForm({
           type="text"
           isInvalid={Boolean(errors.station)}
           {...register("station", {
-            required: "Item name is required.",
+            required: "Station name is required.",
             maxLength: {
               value: 30,
               message: "Max length 30 characters",
