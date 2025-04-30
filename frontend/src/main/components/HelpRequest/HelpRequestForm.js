@@ -99,7 +99,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
             <Form.Label htmlFor="requestTime">Request Time</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix +"requestTime"}
+              data-testid={testIdPrefix + "-requestTime"}
               id="requestTime"
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
