@@ -66,15 +66,22 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     );
 
     fireEvent.change(diningCommonsCode, { target: { value: "bad-input" } });
-    fireEvent.change(itemName, { target: { value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" } });
-    fireEvent.change(station, { target: { value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" } });
+    fireEvent.change(itemName, {
+      target: {
+        value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      },
+    });
+    fireEvent.change(station, {
+      target: {
+        value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      },
+    });
     fireEvent.click(submitButton);
 
     await screen.findByText(/Select a dining commons./);
     // 2 max length errors for item name and station
     const errors = await screen.findAllByText(/Max length 30 characters/);
     expect(errors).toHaveLength(2);
-    
   });
 
   test("Correct Error messsages on missing input", async () => {
