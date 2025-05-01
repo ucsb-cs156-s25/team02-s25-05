@@ -104,21 +104,25 @@ describe("HelpRequestIndexPage tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-requesterEmail`),
     ).toHaveTextContent("awinz@ucsb.edu");
-  
+
     const teamId = screen.getByTestId(`${testId}-cell-row-0-col-teamId`);
     expect(teamId).toHaveTextContent("s25-06");
-  
+
     const tableOrBreakoutRoom = screen.getByTestId(
       `${testId}-cell-row-0-col-tableOrBreakoutRoom`,
     );
     expect(tableOrBreakoutRoom).toHaveTextContent("BreakoutRoom");
-  
-    const requestTime = screen.getByTestId(`${testId}-cell-row-0-col-requestTime`);
+
+    const requestTime = screen.getByTestId(
+      `${testId}-cell-row-0-col-requestTime`,
+    );
     expect(requestTime).toHaveTextContent("2022-02-02T12:00:00");
-  
-    const explanation = screen.getByTestId(`${testId}-cell-row-0-col-explanation`);
+
+    const explanation = screen.getByTestId(
+      `${testId}-cell-row-0-col-explanation`,
+    );
     expect(explanation).toHaveTextContent("I need help with my assignment");
-  
+
     const solved = screen.getByTestId(`${testId}-cell-row-0-col-solved`);
     expect(solved).toHaveTextContent("Yes");
 
@@ -193,7 +197,9 @@ describe("HelpRequestIndexPage tests", () => {
     fireEvent.click(deleteButton);
 
     await waitFor(() => {
-      expect(mockToast).toHaveBeenCalledWith("Help Request with id 1 was deleted");
+      expect(mockToast).toHaveBeenCalledWith(
+        "Help Request with id 1 was deleted",
+      );
     });
 
     await waitFor(() => {

@@ -108,7 +108,9 @@ describe("HelpRequestCreatePage tests", () => {
     const createButton = screen.getByText("Create");
     expect(createButton).toBeInTheDocument();
 
-    fireEvent.change(requesterEmailInput, { target: { value: "awinz@ucsb.edu" } });
+    fireEvent.change(requesterEmailInput, {
+      target: { value: "awinz@ucsb.edu" },
+    });
     fireEvent.change(teamIdInput, {
       target: { value: "s25-10" },
     });
