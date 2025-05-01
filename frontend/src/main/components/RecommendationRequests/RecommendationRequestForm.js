@@ -19,6 +19,13 @@ function RecommendationRequestForm({
 
   const testIdPrefix = "RecommendationRequestForm";
 
+
+    // Stryker disable Regex
+    const isodate_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker restore Regex
+
+
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialContents && (
@@ -36,14 +43,14 @@ function RecommendationRequestForm({
       )}
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="requestorEmail">RequestorEmail</Form.Label>
+        <Form.Label htmlFor="requestorEmail">Requestor Email</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-requestorEmail"}
           id="requestorEmail"
           type="text"
           isInvalid={Boolean(errors.requestorEmail)}
           {...register("requestorEmail", {
-            required: "RequestorEmail is required.",
+            required: "Requestor Email is required.",
             maxLength: {
               value: 30,
               message: "Max length 30 characters",
@@ -56,14 +63,14 @@ function RecommendationRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="professorEmail">ProfessorEmail</Form.Label>
+        <Form.Label htmlFor="professorEmail">Professor Email</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-professorEmail"}
           id="professorEmail"
           type="text"
           isInvalid={Boolean(errors.description)}
           {...register("professorEmail", {
-            required: "ProfessorEmail is required.",
+            required: "Professor Email is required.",
             maxLength: {
               value: 30,
               message: "Max length 30 characters",
@@ -75,6 +82,107 @@ function RecommendationRequestForm({
         </Form.Control.Feedback>
       </Form.Group>
 
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="explanation">Explanation</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-explanation"}
+          id="explanation"
+          type="text"
+          isInvalid={Boolean(errors.description)}
+          {...register("explanation", {
+            required: "Explanation is required.",
+            maxLength: {
+              value: 255,
+              message: "Max length 255 characters",
+            },
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.explanation?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+            <Form.Label htmlFor="dateRequested">Date Requested(in UTC)</Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-dateRequested"}
+              id="dateRequested"
+              type="datetime-local"
+              isInvalid={Boolean(errors.dateRequested)}
+              {...register("dateRequested", {
+                required: true,
+                pattern: isodate_regex,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.dateRequested && "Date requested is required. "}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="dateNeed">Date Needed(in UTC)</Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-dateNeeded"}
+              id="dateNeeded"
+              type="datetime-local"
+              isInvalid={Boolean(errors.dateNeeded)}
+              {...register("dateNeeded", {
+                required: true,
+                pattern: isodate_regex,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.dateNeeded && "Date needed is required. "}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="done">Done</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-explanation"}
+          id="done"
+          as="select"
+          isInvalid={Boolean(errors.description)}
+          {...register("done", {
+            required: "Done is required.",
+          })}
+        >
+          <option value="">---</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </Form.Control>
+        <Form.Control.Feedback type="invalid">
+          {errors.done?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+
+     
+          
+      
+          
+
+          
+
+          
+
+          
+
+          
+          
+          
+          
+
+          
+
+
+
+
+
+
+        
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
       </Button>
