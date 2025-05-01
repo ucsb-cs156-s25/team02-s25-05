@@ -107,8 +107,50 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(explanationInput, { target: { value: "a".repeat(256) } });
     fireEvent.click(submitButton);
 
+
+
+    
+
     await waitFor(() => {
       expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
     });
   });
+
+  
+  test("shows maxLength error when Professor Email >255 chars", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <RecommendationRequestForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    const professorEmailInput = screen.getByLabelText(/Professor Email/i);
+    fireEvent.change(professorEmailInput, { target: { value: "x".repeat(256) } });
+    fireEvent.click(screen.getByText(/Create/));
+
+    expect(
+      await screen.findByText(/Max length 255 characters/)
+    ).toBeInTheDocument();
+  });
+
+  test("shows maxLength error when Requestor Email >255 chars", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <RecommendationRequestForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    const requestorEmailInput = screen.getByLabelText(/Requestor Email/i);
+    fireEvent.change(requestorEmailInput, { target: { value: "a".repeat(256) } });
+    fireEvent.click(screen.getByText(/Create/));
+
+    expect(
+      await screen.findByText(/Max length 255 characters/)
+    ).toBeInTheDocument();
+  });
+  
 });
