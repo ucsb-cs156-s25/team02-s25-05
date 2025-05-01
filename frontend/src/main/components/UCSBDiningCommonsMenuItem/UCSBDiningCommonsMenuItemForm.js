@@ -47,7 +47,7 @@ function UCSBDiningCommonsMenuItemForm({
         >
           <option value="Ortega">Ortega</option>
           <option value="Portola">Portola</option>
-          <option value="Carillo">Carillo</option>
+          <option value="Carrillo">Carrillo</option>
           <option value="De La Guerra">De La Guerra</option>
         </Form.Select>
         <Form.Control.Feedback type="invalid">
@@ -56,14 +56,14 @@ function UCSBDiningCommonsMenuItemForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="name">Item Name</Form.Label>
+        <Form.Label htmlFor="name">Name</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-name"}
           id="name"
           type="text"
           isInvalid={Boolean(errors.name)}
           {...register("name", {
-            required: "Item name is required.",
+            required: "Name is required.",
             maxLength: {
               value: 30,
               message: "Max length 30 characters.",

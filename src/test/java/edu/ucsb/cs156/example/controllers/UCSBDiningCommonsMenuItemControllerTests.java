@@ -137,7 +137,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                                 .build();
 
                 UCSBDiningCommonsMenuItem ucsbDiningCommonsMenuItem2 = UCSBDiningCommonsMenuItem.builder()
-                                .diningCommonsCode("carillo")
+                                .diningCommonsCode("Carrillo")
                                 .name("chocolate milk")
                                 .station("beverage")
                                 .build();

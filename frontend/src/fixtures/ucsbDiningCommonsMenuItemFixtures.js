@@ -14,7 +14,7 @@ const ucsbDiningCommonsMenuItemFixtures = {
     },
     {
       id: 2,
-      diningCommonsCode: "Carillo",
+      diningCommonsCode: "Carrillo",
       name: "salad",
       station: "salad bar",
     },

@@ -59,14 +59,14 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     const diningCommonsCode = screen.getByTestId(
       "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
     );
-    const itemName = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
+    const name = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
     const station = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
     const submitButton = screen.getByTestId(
       "UCSBDiningCommonsMenuItemForm-submit",
     );
 
     fireEvent.change(diningCommonsCode, { target: { value: "bad-input" } });
-    fireEvent.change(itemName, {
+    fireEvent.change(name, {
       target: {
         value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       },
@@ -79,7 +79,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     fireEvent.click(submitButton);
 
     await screen.findByText(/Select a dining commons./);
-    // 2 max length errors for item name and station
+    // 2 max length errors for name and station
     const errors = await screen.findAllByText(/Max length 30 characters/);
     expect(errors).toHaveLength(2);
   });
@@ -97,7 +97,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
 
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Item name is required./);
+    await screen.findByText(/Name is required./);
     expect(screen.getByText(/Station is required./)).toBeInTheDocument();
   });
 
@@ -116,14 +116,14 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     const diningCommonsCode = screen.getByTestId(
       "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
     );
-    const itemName = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
+    const name = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
     const station = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
     const submitButton = screen.getByTestId(
       "UCSBDiningCommonsMenuItemForm-submit",
     );
 
     fireEvent.change(diningCommonsCode, { target: { value: "Portola" } });
-    fireEvent.change(itemName, { target: { value: "cheeseburger" } });
+    fireEvent.change(name, { target: { value: "cheeseburger" } });
     fireEvent.change(station, {
       target: { value: "entrees" },
     });
@@ -134,9 +134,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     expect(
       screen.queryByText(/Select a dining commons./),
     ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(/Item name is required./),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/Name is required./)).not.toBeInTheDocument();
     expect(screen.queryByText(/Station is required./)).not.toBeInTheDocument();
     expect(
       screen.queryByText(/Max length 30 characters/),
