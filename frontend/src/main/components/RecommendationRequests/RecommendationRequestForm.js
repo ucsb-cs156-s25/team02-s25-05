@@ -12,24 +12,25 @@ function RecommendationRequestForm({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm( 
-    { defaultValues: initialContents ? {
-      ...initialContents,
-      dateRequested: initialContents.dateRequested.replace("Z", ""),
-      dateNeeded: initialContents.dateNeeded.replace("Z", "")
-     } : {} });
+  } = useForm({
+    defaultValues: initialContents
+      ? {
+          ...initialContents,
+          dateRequested: initialContents.dateRequested.replace("Z", ""),
+          dateNeeded: initialContents.dateNeeded.replace("Z", ""),
+        }
+      : {},
+  });
   // Stryker restore all
 
   const navigate = useNavigate();
 
   const testIdPrefix = "RecommendationRequestForm";
 
-
-    // Stryker disable Regex
-    const isodate_regex =
+  // Stryker disable Regex
+  const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
   // Stryker restore Regex
-
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -108,47 +109,45 @@ function RecommendationRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-            <Form.Label htmlFor="dateRequested">Date Requested(in UTC)</Form.Label>
-            <Form.Control
-              data-testid={testIdPrefix + "-dateRequested"}
-              id="dateRequested"
-              type="datetime-local"
-              isInvalid={Boolean(errors.dateRequested)}
-              step="1"
-              {...register("dateRequested", {
-                required: true,
-                pattern: isodate_regex,
-              })}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.dateRequested && "Date requested is required. "}
-            </Form.Control.Feedback>
-          </Form.Group>
+        <Form.Label htmlFor="dateRequested">Date Requested(in UTC)</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateRequested"}
+          id="dateRequested"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateRequested)}
+          step="1"
+          {...register("dateRequested", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateRequested && "Date Requested is required."}
+        </Form.Control.Feedback>
+      </Form.Group>
 
-
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="dateNeed">Date Needed(in UTC)</Form.Label>
-            <Form.Control
-              data-testid={testIdPrefix + "-dateNeeded"}
-              id="dateNeeded"
-              type="datetime-local"
-              isInvalid={Boolean(errors.dateNeeded)}
-              step="1"
-              {...register("dateNeeded", {
-                required: true,
-                pattern: isodate_regex,
-              })}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.dateNeeded && "Date needed is required. "}
-            </Form.Control.Feedback>
-          </Form.Group>
-
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateNeed">Date Needed(in UTC)</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateNeeded"}
+          id="dateNeeded"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateNeeded)}
+          step="1"
+          {...register("dateNeeded", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateNeeded && "Date Needed is required."}
+        </Form.Control.Feedback>
+      </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="done">Done</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-explanation"}
+          data-testid={testIdPrefix + "-done"}
           id="done"
           as="select"
           isInvalid={Boolean(errors.description)}
@@ -165,31 +164,6 @@ function RecommendationRequestForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-
-     
-          
-      
-          
-
-          
-
-          
-
-          
-
-          
-          
-          
-          
-
-          
-
-
-
-
-
-
-        
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
       </Button>

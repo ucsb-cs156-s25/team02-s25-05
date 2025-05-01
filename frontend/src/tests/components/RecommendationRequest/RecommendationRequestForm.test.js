@@ -1,8 +1,8 @@
-import { _fireEvent, render, screen, _waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import RecommendationRequestForm from "main/components/RecommendationRequests/RecommendationRequestForm";
-import { _RecommendationRequestFixtures } from "fixtures/recommendationRequestsFixtures";
+import { RecommendationRequestFixtures } from "fixtures/recommendationRequestsFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -16,7 +16,14 @@ jest.mock("react-router-dom", () => ({
 describe("RecommendationRequestForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Requestor Email", "Professor Email", "Explanation", "Date Requested(in UTC)", "Date Needed(in UTC)", "Done"];
+  const expectedHeaders = [
+    "Requestor Email",
+    "Professor Email",
+    "Explanation",
+    "Date Requested(in UTC)",
+    "Date Needed(in UTC)",
+    "Done",
+  ];
   const testId = "RecommendationRequestForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -36,64 +43,72 @@ describe("RecommendationRequestForm tests", () => {
     });
   });
 
-  // test("renders correctly when passing in initialContents", async () => {
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <Router>
-  //         <RestaurantForm initialContents={restaurantFixtures.oneRestaurant} />
-  //       </Router>
-  //     </QueryClientProvider>,
-  //   );
+  test("renders correctly when passing in initialContents", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <RecommendationRequestForm
+            initialContents={
+              RecommendationRequestFixtures.oneRecommendationRequest
+            }
+          />
+        </Router>
+      </QueryClientProvider>,
+    );
 
-  //   expect(await screen.findByText(/Create/)).toBeInTheDocument();
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
 
-  //   expectedHeaders.forEach((headerText) => {
-  //     const header = screen.getByText(headerText);
-  //     expect(header).toBeInTheDocument();
-  //   });
+    expectedHeaders.forEach((headerText) => {
+      const header = screen.getByText(headerText);
+      expect(header).toBeInTheDocument();
+    });
 
-  //   expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
-  //   expect(screen.getByText(`Id`)).toBeInTheDocument();
-  // });
+    expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
+    expect(screen.getByText(`Id`)).toBeInTheDocument();
+  });
 
-  // test("that navigate(-1) is called when Cancel is clicked", async () => {
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <Router>
-  //         <RestaurantForm />
-  //       </Router>
-  //     </QueryClientProvider>,
-  //   );
-  //   expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
-  //   const cancelButton = screen.getByTestId(`${testId}-cancel`);
+  test("that navigate(-1) is called when Cancel is clicked", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <RecommendationRequestForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+    expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
+    const cancelButton = screen.getByTestId(`${testId}-cancel`);
 
-  //   fireEvent.click(cancelButton);
+    fireEvent.click(cancelButton);
 
-  //   await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
-  // });
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
+  });
 
-  // test("that the correct validations are performed", async () => {
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <Router>
-  //         <RestaurantForm />
-  //       </Router>
-  //     </QueryClientProvider>,
-  //   );
+  test("that the correct validations are performed", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <RecommendationRequestForm />
+        </Router>
+      </QueryClientProvider>,
+    );
 
-  //   expect(await screen.findByText(/Create/)).toBeInTheDocument();
-  //   const submitButton = screen.getByText(/Create/);
-  //   fireEvent.click(submitButton);
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+    const submitButton = screen.getByText(/Create/);
+    fireEvent.click(submitButton);
 
-  //   await screen.findByText(/Name is required/);
-  //   expect(screen.getByText(/Description is required/)).toBeInTheDocument();
+    await screen.findByText(/Requestor Email is required/);
+    expect(screen.getByText(/Professor Email is required/)).toBeInTheDocument();
+    expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
+    expect(screen.getByText(/Date Requested is required/)).toBeInTheDocument();
+    expect(screen.getByText(/Date Needed is required/)).toBeInTheDocument();
+    expect(screen.getByText(/Done is required/)).toBeInTheDocument();
 
-  //   const nameInput = screen.getByTestId(`${testId}-name`);
-  //   fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });
-  //   fireEvent.click(submitButton);
+    const explanationInput = screen.getByTestId(`${testId}-explanation`);
+    fireEvent.change(explanationInput, { target: { value: "a".repeat(256) } });
+    fireEvent.click(submitButton);
 
-  //   await waitFor(() => {
-  //     expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
-  //   });
-  // });
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+  });
 });
