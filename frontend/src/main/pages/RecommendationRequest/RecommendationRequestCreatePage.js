@@ -15,13 +15,13 @@ export default function RecommendationRequestCreatePage({ storybook = false }) {
       explanation: recommendationRequest.explanation,
       dateRequested: addZ(recommendationRequest.dateRequested),
       dateNeeded: addZ(recommendationRequest.dateNeeded),
-      done: recommendationRequest.done
+      done: recommendationRequest.done,
     },
   });
 
   const onSuccess = (recommendationrequest) => {
     toast(
-      `New restaurant Created - id: ${recommendationrequest.id} explanation: ${recommendationrequest.explanation}`,
+      `New recommendation request Created - id: ${recommendationrequest.id} requestorEmail: ${recommendationrequest.requestorEmail}`,
     );
   };
 
