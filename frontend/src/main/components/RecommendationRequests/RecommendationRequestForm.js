@@ -12,7 +12,12 @@ function RecommendationRequestForm({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: initialContents || {} });
+  } = useForm( 
+    { defaultValues: initialContents ? {
+      ...initialContents,
+      dateRequested: initialContents.dateRequested.replace("Z", ""),
+      dateNeeded: initialContents.dateNeeded.replace("Z", "")
+     } : {} });
   // Stryker restore all
 
   const navigate = useNavigate();
@@ -109,6 +114,7 @@ function RecommendationRequestForm({
               id="dateRequested"
               type="datetime-local"
               isInvalid={Boolean(errors.dateRequested)}
+              step="1"
               {...register("dateRequested", {
                 required: true,
                 pattern: isodate_regex,
@@ -127,6 +133,7 @@ function RecommendationRequestForm({
               id="dateNeeded"
               type="datetime-local"
               isInvalid={Boolean(errors.dateNeeded)}
+              step="1"
               {...register("dateNeeded", {
                 required: true,
                 pattern: isodate_regex,
