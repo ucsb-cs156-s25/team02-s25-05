@@ -64,7 +64,6 @@ export default function RecommendationRequestTable({
       Header: "Done",
       accessor: "done",
     },
-    
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
@@ -75,6 +74,10 @@ export default function RecommendationRequestTable({
   }
 
   return (
-    <OurTable data={recommendationrequests} columns={columns} testid={testIdPrefix} />
+    <OurTable
+      data={recommendationrequests}
+      columns={columns}
+      testid={testIdPrefix}
+    />
   );
 }

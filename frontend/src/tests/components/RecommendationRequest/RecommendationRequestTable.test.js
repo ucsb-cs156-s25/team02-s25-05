@@ -17,8 +17,24 @@ jest.mock("react-router-dom", () => ({
 describe("RecommendationRequestTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Requestor Email", "Professor Email", "Explanation", "Date Requested", "Date Needed" , "Done"];
-  const expectedFields = ["id", "requestorEmail", "professorEmail", "explanation", "dateRequested", "dateNeeded", "done"];
+  const expectedHeaders = [
+    "id",
+    "Requestor Email",
+    "Professor Email",
+    "Explanation",
+    "Date Requested",
+    "Date Needed",
+    "Done",
+  ];
+  const expectedFields = [
+    "id",
+    "requestorEmail",
+    "professorEmail",
+    "explanation",
+    "dateRequested",
+    "dateNeeded",
+    "done",
+  ];
   const testId = "RecommendationRequestTable";
 
   test("renders empty table correctly", () => {
@@ -29,7 +45,10 @@ describe("RecommendationRequestTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable recommendationrequests={[]} currentUser={currentUser} />
+          <RecommendationRequestTable
+            recommendationrequests={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -57,7 +76,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationrequests={RecommendationRequestFixtures.threeRecommendationRequest}
+            recommendationrequests={
+              RecommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -111,7 +132,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationrequests={RecommendationRequestFixtures.threeRecommendationRequest}
+            recommendationrequests={
+              RecommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -156,7 +179,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationrequests={RecommendationRequestFixtures.threeRecommendationRequest}
+            recommendationrequests={
+              RecommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -167,7 +192,7 @@ describe("RecommendationRequestTable tests", () => {
     expect(
       await screen.findByTestId(`${testId}-cell-row-0-col-id`),
     ).toHaveTextContent("2");
-  
+
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
     );
@@ -178,7 +203,9 @@ describe("RecommendationRequestTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/recommendationrequests/edit/2"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/recommendationrequests/edit/2",
+      ),
     );
   });
 
@@ -196,7 +223,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationrequests={RecommendationRequestFixtures.threeRecommendationRequest}
+            recommendationrequests={
+              RecommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -207,7 +236,7 @@ describe("RecommendationRequestTable tests", () => {
     expect(
       await screen.findByTestId(`${testId}-cell-row-0-col-id`),
     ).toHaveTextContent("2");
-   
+
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
     );
@@ -221,6 +250,4 @@ describe("RecommendationRequestTable tests", () => {
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
   });
-  
-  
 });
