@@ -26,7 +26,7 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
       return (
         <Button
           variant="primary"
-          href="/ucsbdiningcommonsmenuitem/create"
+          href="/diningcommonsmenuitem/create"
           style={{ float: "right" }}
         >
           Create Menu Item
@@ -40,27 +40,11 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
       <div className="pt-2">
         {createButton()}
         <h1>Menu Items</h1>
-        <UCSBDiningCommonsMenuItemTable menuItems={menuItems} currentUser={currentUser} />
+        <UCSBDiningCommonsMenuItemTable
+          menuItems={menuItems}
+          currentUser={currentUser}
+        />
       </div>
     </BasicLayout>
   );
 }
-
-
-
-// export default function UCSBDiningCommonsMenuItemIndexPage() {
-//   // Stryker disable all : placeholder for future implementation
-//   return (
-//     <BasicLayout>
-//       <div className="pt-2">
-//         <h1>Index page not yet implemented</h1>
-//         <p>
-//           <a href="/diningcommonsmenuitem/create">Create</a>
-//         </p>
-//         <p>
-//           <a href="/diningcommonsmenuitem/edit/1">Edit</a>
-//         </p>
-//       </div>
-//     </BasicLayout>
-//   );
-// }
