@@ -124,7 +124,7 @@ function RecommendationRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateNeed">Date Needed(in UTC)</Form.Label>
+        <Form.Label htmlFor="dateNeeded">Date Needed(in UTC)</Form.Label>
         <Form.Control
           id="dateNeeded"
           type="datetime-local"
