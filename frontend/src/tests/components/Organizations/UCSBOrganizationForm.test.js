@@ -77,7 +77,8 @@ describe("UCSBOrganizationForm tests", () => {
     expect(
       screen.getByTestId(`${testIdPrefix}-orgTranslation`),
     ).toBeInTheDocument();
-    expect(screen.getByTestId(`${testIdPrefix}-inactive`)).toBeInTheDocument();
+    const inactiveCheckbox = screen.getByTestId(`${testIdPrefix}-inactive`); // Get checkbox
+    expect(inactiveCheckbox).toBeInTheDocument();
 
     // Check initial values using findByDisplayValue
     await screen.findByDisplayValue(oneOrg.orgCode);
