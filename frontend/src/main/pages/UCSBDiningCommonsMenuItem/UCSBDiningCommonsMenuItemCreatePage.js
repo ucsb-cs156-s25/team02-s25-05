@@ -4,7 +4,9 @@ import { Navigate } from "react-router-dom";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function UCSBDiningCommonsMenuItemCreatePage({ storybook = false }) {
+export default function UCSBDiningCommonsMenuItemCreatePage({
+  storybook = false,
+}) {
   const objectToAxiosParams = (menuItem) => ({
     url: "/api/ucsbdiningcommonsmenuitem/post",
     method: "POST",
@@ -16,16 +18,14 @@ export default function UCSBDiningCommonsMenuItemCreatePage({ storybook = false 
   });
 
   const onSuccess = (menuItem) => {
-    toast(
-      `New menu item Created - id: ${menuItem.id} name: ${menuItem.name}`
-    );
+    toast(`New menu item Created - id: ${menuItem.id} name: ${menuItem.name}`);
   };
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    ["/api/ucsbdiningcommonsmenuitem/all"] // mutation makes this key stale so that pages relying on it reload
+    ["/api/ucsbdiningcommonsmenuitem/all"], // mutation makes this key stale so that pages relying on it reload
   );
 
   const { isSuccess } = mutation;
