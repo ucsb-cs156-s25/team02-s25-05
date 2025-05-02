@@ -1,15 +1,13 @@
 const helpRequestFixtures = {
-  oneHelpRequest: [
-    {
-      id: 1,
-      requesterEmail: "awin@ucsb.edu",
-      teamId: "s25-05",
-      tableOrBreakoutRoom: "table",
-      requestTime: "2022-01-02T12:00:00",
-      explanation: "I need help with my project",
-      solved: false,
-    },
-  ],
+  oneHelpRequest: {
+    id: 1,
+    requesterEmail: "awin@ucsb.edu",
+    teamId: "s25-05",
+    tableOrBreakoutRoom: "table",
+    requestTime: "2022-01-02T12:00:00",
+    explanation: "I need help with my project",
+    solved: false,
+  },
 
   threeHelpRequests: [
     {
@@ -24,7 +22,7 @@ const helpRequestFixtures = {
 
     {
       id: 3,
-      requesterEmail: "awin@ucsb.edu",
+      requesterEmail: "awinz@ucsb.edu",
       teamId: "s25-07",
       tableOrBreakoutRoom: "table",
       requestTime: "2022-03-02T12:00:00",
