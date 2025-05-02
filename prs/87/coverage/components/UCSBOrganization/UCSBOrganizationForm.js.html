@@ -165,7 +165,11 @@
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,8 +181,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
@@ -267,116 +269,117 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 &nbsp;
-function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Create" }) {
+function UCSBOrganizationForm({
+  initialContents,
+  submitAction,
+  buttonLabel = "Create",
+}) {
+  // Stryker disable all
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({ defaultValues: initialContents || {} });
+  // Stryker restore all
 &nbsp;
-    // Stryker disable all
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm(
-        { defaultValues: initialContents || {} }
-    );
-    // Stryker restore all
+  const navigate = useNavigate();
+  const testIdPrefix = "UCSBOrganizationForm";
 &nbsp;
-    const navigate = useNavigate();
-    const testIdPrefix = "UCSBOrganizationForm";
+  return (
+    &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
+      {/* orgCode is the primary key. Editable on create, read-only on update. */}
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="orgCode"&gt;Organization Code&lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid={testIdPrefix + "-orgCode"}
+          id="orgCode"
+          type="text"
+          disabled={initialContents ? true : false}
+          isInvalid={Boolean(errors.orgCode)}
+          {...register("orgCode", {
+            required: "Organization Code is required.",
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.orgCode?.message}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-    return (
-        &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="orgTranslationShort"&gt;
+          Short Organization Translation
+        &lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid={testIdPrefix + "-orgTranslationShort"}
+          id="orgTranslationShort"
+          type="text"
+          isInvalid={Boolean(errors.orgTranslationShort)}
+          // Register with ONLY required validation
+          {...register("orgTranslationShort", {
+            required: "Short Organization Translation is required.",
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.orgTranslationShort?.message}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-            {/* orgCode is the primary key. Editable on create, read-only on update. */}
-            &lt;Form.Group className="mb-3" &gt;
-                &lt;Form.Label htmlFor="orgCode"&gt;Organization Code&lt;/Form.Label&gt;
-                &lt;Form.Control
-                    data-testid={testIdPrefix + "-orgCode"}
-                    id="orgCode"
-                    type="text"
-                    disabled={initialContents ? true : false}
-                    isInvalid={Boolean(errors.orgCode)}
-                    {...register("orgCode", {
-                        required: "Organization Code is required."
-                    })}
-                /&gt;
-                &lt;Form.Control.Feedback type="invalid"&gt;
-                    {errors.orgCode?.message}
-                &lt;/Form.Control.Feedback&gt;
-            &lt;/Form.Group&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="orgTranslation"&gt;
+          Organization Translation
+        &lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid={testIdPrefix + "-orgTranslation"}
+          id="orgTranslation"
+          type="text"
+          isInvalid={Boolean(errors.orgTranslation)}
+          // Register with ONLY required validation
+          {...register("orgTranslation", {
+            required: "Organization Translation is required.",
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.orgTranslation?.message}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-            &lt;Form.Group className="mb-3" &gt;
-                &lt;Form.Label htmlFor="orgTranslationShort"&gt;Short Organization Translation&lt;/Form.Label&gt;
-                &lt;Form.Control
-                    data-testid={testIdPrefix + "-orgTranslationShort"}
-                    id="orgTranslationShort"
-                    type="text"
-                    isInvalid={Boolean(errors.orgTranslationShort)}
-                    // Register with ONLY required validation
-                    {...register("orgTranslationShort", {
-                        required: "Short Organization Translation is required."
-                    })}
-                /&gt;
-                &lt;Form.Control.Feedback type="invalid"&gt;
-                    {errors.orgTranslationShort?.message}
-                &lt;/Form.Control.Feedback&gt;
-            &lt;/Form.Group&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Check
+          type="checkbox"
+          label="Inactive"
+          id="inactive"
+          data-testid={testIdPrefix + "-inactive"}
+          {...register("inactive")}
+        /&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-            &lt;Form.Group className="mb-3" &gt;
-                &lt;Form.Label htmlFor="orgTranslation"&gt;Organization Translation&lt;/Form.Label&gt;
-                &lt;Form.Control
-                    data-testid={testIdPrefix + "-orgTranslation"}
-                    id="orgTranslation"
-                    type="text"
-                    isInvalid={Boolean(errors.orgTranslation)}
-                     // Register with ONLY required validation
-                    {...register("orgTranslation", {
-                        required: "Organization Translation is required."
-                    })}
-                /&gt;
-                &lt;Form.Control.Feedback type="invalid"&gt;
-                    {errors.orgTranslation?.message}
-                &lt;/Form.Control.Feedback&gt;
-            &lt;/Form.Group&gt;
-&nbsp;
-            &lt;Form.Group className="mb-3"&gt;
-                &lt;Form.Check
-                    type="checkbox"
-                    label="Inactive"
-                    id="inactive"
-                    data-testid={testIdPrefix + "-inactive"}
-                    {...register("inactive")}
-                /&gt;
-            &lt;/Form.Group&gt;
-&nbsp;
-            &lt;Button
-                type="submit"
-                data-testid={testIdPrefix + "-submit"}
-            &gt;
-                {buttonLabel}
-            &lt;/Button&gt;
-            &lt;Button
-                variant="Secondary"
-                onClick={() =&gt; navigate(-1)}
-                data-testid={testIdPrefix + "-cancel"}
-            &gt;
-                Cancel
-            &lt;/Button&gt;
-&nbsp;
-        &lt;/Form&gt;
-    )
+      &lt;Button type="submit" data-testid={testIdPrefix + "-submit"}&gt;
+        {buttonLabel}
+      &lt;/Button&gt;
+      &lt;Button
+        variant="Secondary"
+        onClick={() =&gt; navigate(-1)}
+        data-testid={testIdPrefix + "-cancel"}
+      &gt;
+        Cancel
+      &lt;/Button&gt;
+    &lt;/Form&gt;
+  );
 }
 &nbsp;
-export default UCSBOrganizationForm;</pre></td></tr></table></pre>
+export default UCSBOrganizationForm;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-02T01:20:21.982Z
+                at 2025-05-02T01:23:38.313Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
