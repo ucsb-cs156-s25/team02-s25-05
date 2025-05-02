@@ -85,11 +85,7 @@ describe("UCSBOrganizationForm tests", () => {
     await screen.findByDisplayValue(oneOrg.orgTranslation);
 
     // Check checkbox state
-    if (oneOrg.inactive) {
-      expect(screen.getByTestId(`${testIdPrefix}-inactive`)).toBeChecked();
-    } else {
-      expect(screen.getByTestId(`${testIdPrefix}-inactive`)).not.toBeChecked();
-    }
+    expect(inactiveCheckbox.checked).toEqual(oneOrg.inactive);
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
