@@ -97,7 +97,7 @@ describe("MenuItemReviewEditPage tests", () => {
         reviewerEmail: "cgaucho17@ucsb.edu",
         stars: "1",
         dateReviewed: "2022-12-25T08:00",
-        comments: "changed my mind - too icy",
+        comments: "changed my mind too icy",
       });
     });
 
@@ -173,19 +173,19 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(commentsField).toHaveValue("pretty darn good pi");
       expect(submitButton).toBeInTheDocument();
 
-      fireEvent.change(itemIdField, { target: { value: "1225" } });
+      fireEvent.change(itemIdField, { target: { value: 1225 } });
       fireEvent.change(reviewerEmailField, { target: { value: "cgaucho17@ucsb.edu" } });
-      fireEvent.change(starsField, { target: { value: "1" } });
+      fireEvent.change(starsField, { target: { value: 1 } });
       fireEvent.change(dateReviewedField, {
         target: { value: "2022-12-25T08:00" },
       });
-      fireEvent.change(commentsField, { target: { value: "changed my mind - too icy" } });
+      fireEvent.change(commentsField, { target: { value: "changed my mind too icy" } });
 
       fireEvent.click(submitButton);
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "MenuItemReview Updated - id: 17 comments: changed my mind - too icy",
+        "MenuItemReview Updated - id: 17 comments: changed my mind too icy",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/menuitemreview" });
 
