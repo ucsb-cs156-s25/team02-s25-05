@@ -1,6 +1,3 @@
-jest.mock("react-toastify", () => ({
-  toast: jest.fn(),
-}));
 import { toast } from "react-toastify";
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
@@ -10,6 +7,10 @@ import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
+
+jest.mock("react-toastify", () => ({
+  toast: jest.fn(),
+}));
 
 const mockedNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
