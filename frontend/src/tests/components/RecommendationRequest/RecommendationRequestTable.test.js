@@ -204,7 +204,7 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/recommendationrequests/edit/2",
+        "/recommendationrequest/edit/2",
       ),
     );
   });
