@@ -96,7 +96,9 @@ describe("MenuItemReviewCreatePage tests", () => {
     const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
+    fireEvent.change(itemIdField, { target: { value: 26 } });
     fireEvent.change(reviewerEmailField, { target: { value: "cgaucho26@ucsb.edu" } });
+    fireEvent.change(starsField, { target: { value: 5 } });
     fireEvent.change(dateReviewedField, {
       target: { value: "2022-02-02T00:00" },
     });
@@ -110,9 +112,9 @@ describe("MenuItemReviewCreatePage tests", () => {
 
     expect(axiosMock.history.post[0].params).toEqual({
       id: 17,
-      itemId: 26,
+      itemId: "26",
       reviewerEmail: "cgaucho26@ucsb.edu",
-      stars: 5,
+      stars: "5",
       dateReviewed: "2022-02-02T00:00",
       comments: "tastes 17",
     });
