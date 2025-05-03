@@ -48,7 +48,9 @@ describe("RecommendationRequestEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/recommendationrequest", { params: { id: 17 } }).timeout();
+      axiosMock
+        .onGet("/api/recommendationrequest", { params: { id: 17 } })
+        .timeout();
     });
 
     const queryClient = new QueryClient();
@@ -63,7 +65,9 @@ describe("RecommendationRequestEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit Recommendation Request");
-      expect(screen.queryByTestId("RecommendationRequest-explanation")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("RecommendationRequest-explanation"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -80,15 +84,17 @@ describe("RecommendationRequestEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/recommendationrequest", { params: { id: 17 } }).reply(200, {
-        id: 17,
-        requestorEmail: "kevinlee@ucsb.edu",
-        professorEmail: "zmatni@ucsb.edu",
-        explanation: "Recommendation 1 ",
-        dateRequested: "2025-04-30T05:50:50",
-        dateNeeded: "2025-04-30T06:50:50",
-        done: false,
-      });
+      axiosMock
+        .onGet("/api/recommendationrequest", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          requestorEmail: "kevinlee@ucsb.edu",
+          professorEmail: "zmatni@ucsb.edu",
+          explanation: "Recommendation 1 ",
+          dateRequested: "2025-04-30T05:50:50",
+          dateNeeded: "2025-04-30T06:50:50",
+          done: false,
+        });
       axiosMock.onPut("/api/recommendationrequest").reply(200, {
         id: 17,
         requestorEmail: "sauldiaz@ucsb.edu",
@@ -114,17 +120,29 @@ describe("RecommendationRequestEditPage tests", () => {
       await screen.findByTestId("RecommendationRequestForm-id");
 
       const idField = screen.getByTestId("RecommendationRequestForm-id");
-      const requestorEmailField = screen.getByTestId("RecommendationRequestForm-requestorEmail");
-      const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
-      const explanationField = screen.getByTestId("RecommendationRequestForm-explanation");
-      const dateRequestedField = screen.getByTestId("RecommendationRequestForm-dateRequested");
-      const dateNeededField = screen.getByTestId("RecommendationRequestForm-dateNeeded");
+      const requestorEmailField = screen.getByTestId(
+        "RecommendationRequestForm-requestorEmail",
+      );
+      const professorEmailField = screen.getByTestId(
+        "RecommendationRequestForm-professorEmail",
+      );
+      const explanationField = screen.getByTestId(
+        "RecommendationRequestForm-explanation",
+      );
+      const dateRequestedField = screen.getByTestId(
+        "RecommendationRequestForm-dateRequested",
+      );
+      const dateNeededField = screen.getByTestId(
+        "RecommendationRequestForm-dateNeeded",
+      );
       const doneField = screen.getByTestId("RecommendationRequestForm-done");
-      const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
+      const submitButton = screen.getByTestId(
+        "RecommendationRequestForm-submit",
+      );
 
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
-      
+
       expect(requestorEmailField).toBeInTheDocument();
       expect(requestorEmailField).toHaveValue("kevinlee@ucsb.edu");
 

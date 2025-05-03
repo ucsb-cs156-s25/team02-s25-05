@@ -27,9 +27,12 @@ Default.parameters = {
       });
     }),
     http.get("/api/recommendationrequest", () => {
-      return HttpResponse.json(RecommendationRequestFixtures.threeRecommendationRequest, {
-        status: 200,
-      });
+      return HttpResponse.json(
+        RecommendationRequestFixtures.threeRecommendationRequest,
+        {
+          status: 200,
+        },
+      );
     }),
     http.put("/api/recommendationrequest", () => {
       return HttpResponse.json({}, { status: 200 });
