@@ -201,7 +201,7 @@ describe("UserTable tests", () => {
     });
 
     const deleteButton = screen.getByTestId(
-      `MenuItemReview-cell-row-0-col-Delete-button`,
+      `MenuItemReviewTable-cell-row-0-col-Delete-button`,
     );
     expect(deleteButton).toBeInTheDocument();
 
