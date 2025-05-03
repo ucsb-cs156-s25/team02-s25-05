@@ -16,9 +16,7 @@ export default function UCSBOrganizationTable({
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(
-      `/ucsborganizations/edit/${cell.row.values.orgCode}`
-    );
+    navigate(`/ucsborganizations/edit/${cell.row.values.orgCode}`);
   };
 
   const deleteMutation = useBackendMutation(

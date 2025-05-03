@@ -1,3 +1,7 @@
+jest.mock("react-toastify", () => ({
+  toast: jest.fn(),
+}));
+import { toast } from "react-toastify";
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
@@ -15,6 +19,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
+  const invalidateSpy = jest.spyOn(queryClient, "invalidateQueries");
   const expectedHeaders = [
     "Org Code",
     "Org Translation Short",
@@ -34,15 +39,20 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable ucsbOrganizations={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable
+            ucsbOrganizations={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-    expectedHeaders.forEach(h => {
+    expectedHeaders.forEach((h) => {
       expect(screen.getByText(h)).toBeInTheDocument();
     });
-    expectedFields.forEach(f => {
-      expect(screen.queryByTestId(`${testId}-cell-row-0-col-${f}`)).not.toBeInTheDocument();
+    expectedFields.forEach((f) => {
+      expect(
+        screen.queryByTestId(`${testId}-cell-row-0-col-${f}`),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -53,27 +63,40 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable ucsbOrganizations={fixtures} currentUser={currentUser} />
+          <UCSBOrganizationTable
+            ucsbOrganizations={fixtures}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    expectedHeaders.forEach(h => {
+    expectedHeaders.forEach((h) => {
       expect(screen.getByText(h)).toBeInTheDocument();
     });
-    expectedFields.forEach(f => {
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-${f}`)).toBeInTheDocument();
+    expectedFields.forEach((f) => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-${f}`),
+      ).toBeInTheDocument();
     });
 
     const firstOrg = fixtures[0];
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent(firstOrg.orgCode);
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent(firstOrg.orgTranslationShort);
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
+    ).toHaveTextContent(firstOrg.orgCode);
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
+    ).toHaveTextContent(firstOrg.orgTranslationShort);
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
@@ -85,16 +108,21 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable ucsbOrganizations={fixtures} currentUser={currentUser} />
+          <UCSBOrganizationTable
+            ucsbOrganizations={fixtures}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    expectedHeaders.forEach(h => {
+    expectedHeaders.forEach((h) => {
       expect(screen.getByText(h)).toBeInTheDocument();
     });
-    expectedFields.forEach(f => {
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-${f}`)).toBeInTheDocument();
+    expectedFields.forEach((f) => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-${f}`),
+      ).toBeInTheDocument();
     });
 
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -108,17 +136,20 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable ucsbOrganizations={fixtures} currentUser={currentUser} />
+          <UCSBOrganizationTable
+            ucsbOrganizations={fixtures}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const firstOrg = fixtures[0];
     fireEvent.click(screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`));
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        `/ucsborganizations/edit/${firstOrg.orgCode}`
-      )
+        `/ucsborganizations/edit/${firstOrg.orgCode}`,
+      ),
     );
   });
 
@@ -134,15 +165,32 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable ucsbOrganizations={fixtures} currentUser={currentUser} />
+          <UCSBOrganizationTable
+            ucsbOrganizations={fixtures}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    fireEvent.click(screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`));
+    fireEvent.click(
+      screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`),
+    );
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({
       orgCode: fixtures[0].orgCode,
     });
+    await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
+    expect(axiosMock.history.delete[0].params).toEqual({
+      orgCode: fixtures[0].orgCode,
+    });
+    await waitFor(() =>
+      expect(invalidateSpy).toHaveBeenCalledWith([
+        "/api/ucsborganizations/all",
+      ]),
+    );
+    await waitFor(() =>
+      expect(toast).toHaveBeenCalledWith({ message: "Deleted successfully" }),
+    );
   });
 });
