@@ -197,7 +197,7 @@ describe("MenuItemReviewEditPage tests", () => {
           reviewerEmail: "cgaucho17@ucsb.edu",
           stars: "1",
           dateReviewed: "2022-12-25T08:00",
-          comments: "changed my mind - too icy",
+          comments: "changed my mind too icy",
         }),
       ); // posted object
     });
