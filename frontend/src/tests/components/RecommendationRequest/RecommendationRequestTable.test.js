@@ -222,18 +222,18 @@ describe("RecommendationRequestTable tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
-    
-    const doneCell = screen.getByTestId("RecommendationRequestTable-cell-row-0-col-done");
+
+    const doneCell = screen.getByTestId(
+      "RecommendationRequestTable-cell-row-0-col-done",
+    );
     expect(doneCell).toHaveTextContent("false");
-    
-    const doneCell2 = screen.getByTestId("RecommendationRequestTable-cell-row-2-col-done");
+
+    const doneCell2 = screen.getByTestId(
+      "RecommendationRequestTable-cell-row-2-col-done",
+    );
     expect(doneCell2).toHaveTextContent("true");
-
-
-  
-   
   });
-  
+
   test("Delete button calls delete callback", async () => {
     // arrange
     const currentUser = currentUserFixtures.adminUser;
