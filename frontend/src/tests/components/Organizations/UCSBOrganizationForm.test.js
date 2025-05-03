@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import UCSBOrganizationForm from "main/components/UCSBOrganization/UCSBOrganizationForm";
+import UCSBOrganizationForm from "main/components/UCSBOrganizations/UCSBOrganizationForm";
 // Make sure the import path is correct for your project structure
 import { ucsbOrganizationFixtures } from "../../../fixtures/ucsbOrganizationFixtures";
 
