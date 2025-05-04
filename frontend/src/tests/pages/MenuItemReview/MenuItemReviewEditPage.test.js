@@ -83,14 +83,16 @@ describe("MenuItemReviewEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/menuitemreview", { params: { id: 17 } }).reply(200, {
-        id: 17,
-        itemId: 314,
-        reviewerEmail: "cgaucho26@ucsb.edu",
-        stars: 5,
-        dateReviewed: "2022-03-14T15:00",
-        comments: "pretty darn good pi",
-      });
+      axiosMock
+        .onGet("/api/menuitemreview", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          itemId: 314,
+          reviewerEmail: "cgaucho26@ucsb.edu",
+          stars: 5,
+          dateReviewed: "2022-03-14T15:00",
+          comments: "pretty darn good pi",
+        });
       axiosMock.onPut("/api/menuitemreview").reply(200, {
         id: "17",
         itemId: "1225",
@@ -127,7 +129,9 @@ describe("MenuItemReviewEditPage tests", () => {
 
       const idField = screen.getByTestId("MenuItemReviewForm-id");
       const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-      const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+      const reviewerEmailField = screen.getByTestId(
+        "MenuItemReviewForm-reviewerEmail",
+      );
       const starsField = screen.getByTestId("MenuItemReviewForm-stars");
       const dateReviewedField = screen.getByTestId(
         "MenuItemReviewForm-dateReviewed",
@@ -157,7 +161,9 @@ describe("MenuItemReviewEditPage tests", () => {
 
       const idField = screen.getByTestId("MenuItemReviewForm-id");
       const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-      const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+      const reviewerEmailField = screen.getByTestId(
+        "MenuItemReviewForm-reviewerEmail",
+      );
       const starsField = screen.getByTestId("MenuItemReviewForm-stars");
       const dateReviewedField = screen.getByTestId(
         "MenuItemReviewForm-dateReviewed",
@@ -174,12 +180,16 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(submitButton).toBeInTheDocument();
 
       fireEvent.change(itemIdField, { target: { value: 1225 } });
-      fireEvent.change(reviewerEmailField, { target: { value: "cgaucho17@ucsb.edu" } });
+      fireEvent.change(reviewerEmailField, {
+        target: { value: "cgaucho17@ucsb.edu" },
+      });
       fireEvent.change(starsField, { target: { value: 1 } });
       fireEvent.change(dateReviewedField, {
         target: { value: "2022-12-25T08:00" },
       });
-      fireEvent.change(commentsField, { target: { value: "changed my mind too icy" } });
+      fireEvent.change(commentsField, {
+        target: { value: "changed my mind too icy" },
+      });
 
       fireEvent.click(submitButton);
 
