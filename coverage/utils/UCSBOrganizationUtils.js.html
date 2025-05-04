@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for utils/systemInfo.js</title>
+    <title>Code coverage report for utils/UCSBOrganizationUtils.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">utils</a> systemInfo.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">utils</a> UCSBOrganizationUtils.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -91,15 +91,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">86x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">56x</span>
-<span class="cline-any cline-yes">56x</span>
-<span class="cline-any cline-yes">50x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,33 +103,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useQuery } from "react-query";
-import axios from "axios";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { toast } from "react-toastify";
 &nbsp;
-export function useSystemInfo() {
-  return useQuery(
-    "systemInfo",
-    async () =&gt; {
-      try {
-        const response = await axios.get("/api/systemInfo");
-        return response.data;
-      } catch (e) {
-        console.error("Error invoking axios.get: ", e);
-        return {};
-      }
+/**
+ * Fired when a UCSBOrganization is successfully deleted.
+ * @param {string} message – the success message returned by the backend
+ */
+export function onDeleteSuccess(message) {
+  console.log(message);
+  toast(message);
+}
+&nbsp;
+/**
+ * Converts a table-cell into the axios-params object needed to delete a UCSBOrganization.
+ * @param {object} cell – the react-table cell containing row.values.orgCode
+ */
+export function cellToAxiosParamsDelete(cell) {
+  return {
+    url: "/api/ucsborganizations",
+    method: "DELETE",
+    params: {
+      orgCode: cell.row.values.orgCode,
     },
-    {
-      initialData: {
-        initialData: true,
-        springH2ConsoleEnabled: false,
-        showSwaggerUILink: false,
-      },
-    },
-  );
+  };
 }
 &nbsp;</pre></td></tr></table></pre>
 
