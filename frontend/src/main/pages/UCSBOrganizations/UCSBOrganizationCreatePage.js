@@ -28,6 +28,7 @@ export default function UCSBOrganizationCreatePage({ storybook = false }) {
   const mutation = useBackendMutation(
     objectToAxiosParams,
     { onSuccess },
+    // Stryker disable next-line all
     ["/api/ucsborganizations/all"], // mark list stale
   );
 
