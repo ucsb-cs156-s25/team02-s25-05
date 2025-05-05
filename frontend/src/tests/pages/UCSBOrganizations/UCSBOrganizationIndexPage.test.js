@@ -56,9 +56,8 @@ describe("UCSBOrganizationIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() =>
-      expect(screen.getByText(/Create UCSB Organization/)).toBeInTheDocument(),
-    );
+    const emptyMsg = await screen.findByText("No organizations found");
+    expect(emptyMsg).toBeInTheDocument();
     const button = screen.getByText(/Create UCSB Organization/);
     expect(button).toHaveAttribute("href", "/ucsborganizations/create");
     expect(button).toHaveAttribute("style", "float: right;");
@@ -148,11 +147,10 @@ describe("UCSBOrganizationIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() =>
-      expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
-      ).toBeInTheDocument(),
+    const cell = await screen.findByTestId(
+      `${testId}-cell-row-0-col-orgCode`
     );
+    expect(cell).toBeInTheDocument();
 
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
