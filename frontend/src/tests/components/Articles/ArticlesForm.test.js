@@ -1,6 +1,6 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
 import ArticlesForm from "main/components/Articles/ArticlesForm";
-import { articlesFixtures, ArticlesFixtures } from "fixtures/articlesFixtures";
+import { articlesFixtures } from "fixtures/articlesFixtures";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const mockedNavigate = jest.fn();
@@ -53,7 +53,7 @@ describe("ArticlesForm tests", () => {
     fireEvent.change(dateAddedField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
 
-    screen.queryByText(/dateAdded must be in ISO format/)
+    screen.queryByText(/dateAdded must be in ISO format/);
     //await screen.findByTestId(/ArticlesForm-id/);
     //await screen.findByText(/QuarterYYYYQ must be in the format YYYYQ/);
   });
@@ -95,9 +95,13 @@ describe("ArticlesForm tests", () => {
 
     fireEvent.change(titleField, { target: { value: "Article 1" } });
     fireEvent.change(urlField, { target: { value: "article.com" } });
-    fireEvent.change(explanationField, { target: { value: "this is a test article" } });
+    fireEvent.change(explanationField, {
+      target: { value: "this is a test article" },
+    });
     fireEvent.change(emailField, { target: { value: "test@article.com" } });
-    fireEvent.change(dateAddedField, { target: { value: "2025-01-01T00:00:00" } });
+    fireEvent.change(dateAddedField, {
+      target: { value: "2025-01-01T00:00:00" },
+    });
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());

@@ -64,9 +64,9 @@ function ArticlesForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
-        
+
         <Col>
-        <Form.Group className="mb-3">
+          <Form.Group className="mb-3">
             <Form.Label htmlFor="url">URL</Form.Label>
             <Form.Control
               data-testid="Articles-url"
