@@ -204,9 +204,34 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/recommendationrequests/edit/2",
+        "/recommendationrequest/edit/2",
       ),
     );
+  });
+
+  test("dropdown for done can be selected", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <RecommendationRequestTable
+            recommendationrequests={
+              RecommendationRequestFixtures.threeRecommendationRequest
+            }
+            currentUser={currentUserFixtures.adminUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const doneCell = screen.getByTestId(
+      "RecommendationRequestTable-cell-row-0-col-done",
+    );
+    expect(doneCell).toHaveTextContent("false");
+
+    const doneCell2 = screen.getByTestId(
+      "RecommendationRequestTable-cell-row-2-col-done",
+    );
+    expect(doneCell2).toHaveTextContent("true");
   });
 
   test("Delete button calls delete callback", async () => {
