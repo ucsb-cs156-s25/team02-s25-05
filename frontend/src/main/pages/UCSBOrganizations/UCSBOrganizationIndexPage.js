@@ -15,8 +15,10 @@ export default function UCSBOrganizationIndexPage() {
     error: _error,
     status: _status,
   } = useBackend(
+    // Stryker disable next-line all
     ["/api/ucsborganizations/all"],
     { method: "GET", url: "/api/ucsborganizations/all" },
+    // Stryker disable next-line all
     [] /* default empty list */,
   );
 

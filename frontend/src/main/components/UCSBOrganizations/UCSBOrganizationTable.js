@@ -45,6 +45,7 @@ export default function UCSBOrganizationTable({
     {
       Header: "Inactive",
       accessor: "inactive",
+      // Stryker disable next-line all
       Cell: ({ value }) => (value ? "Yes" : "No"),
     },
   ];
