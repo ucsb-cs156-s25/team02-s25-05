@@ -3,10 +3,10 @@ import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBOrganizationCreatePage from "main/pages/UCSBOrganization/UCSBOrganizationCreatePage";
+import UCSBOrganizationCreatePage from "main/pages/UCSBOrganizations/UCSBOrganizationCreatePage";
 
 export default {
-  title: "pages/UCSBOrganization/UCSBOrganizationCreatePage",
+  title: "pages/UCSBOrganizations/UCSBOrganizationCreatePage",
   component: UCSBOrganizationCreatePage,
 };
 
@@ -16,13 +16,13 @@ export const Default = Template.bind({});
 Default.parameters = {
   msw: [
     http.get("/api/currentUser", () =>
-      HttpResponse.json(apiCurrentUserFixtures.adminUser, { status: 200 })
+      HttpResponse.json(apiCurrentUserFixtures.adminUser, { status: 200 }),
     ),
     http.get("/api/systemInfo", () =>
-      HttpResponse.json(systemInfoFixtures.showingNeither, { status: 200 })
+      HttpResponse.json(systemInfoFixtures.showingNeither, { status: 200 }),
     ),
     http.post("/api/ucsborganizations/post", () =>
-      HttpResponse.json({}, { status: 200 })
+      HttpResponse.json({}, { status: 200 }),
     ),
   ],
 };
