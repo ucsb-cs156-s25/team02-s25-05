@@ -55,14 +55,10 @@ describe("UCSBOrganizationCreatePage tests", () => {
         <MemoryRouter>
           <UCSBOrganizationCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    await waitFor(() =>
-      expect(
-        screen.getByLabelText("Organization Code")
-      ).toBeInTheDocument()
-    );
+    await screen.findByLabelText("Organization Code");
   });
 
   /* ---------- happy‑path submit ---------- */
@@ -81,7 +77,7 @@ describe("UCSBOrganizationCreatePage tests", () => {
         <MemoryRouter>
           <UCSBOrganizationCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     /* fill out the form */
@@ -109,7 +105,7 @@ describe("UCSBOrganizationCreatePage tests", () => {
 
     /* toast and redirect called */
     expect(mockToast).toHaveBeenCalledWith(
-      "New organization created - orgCode: ENGR short: Engineering"
+      "New organization created - orgCode: ENGR short: Engineering",
     );
     expect(mockNavigate).toHaveBeenCalledWith({ to: "/ucsborganizations" });
   });

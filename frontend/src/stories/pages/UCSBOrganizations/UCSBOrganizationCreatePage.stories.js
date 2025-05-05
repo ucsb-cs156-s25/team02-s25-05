@@ -16,13 +16,13 @@ export const Default = Template.bind({});
 Default.parameters = {
   msw: [
     http.get("/api/currentUser", () =>
-      HttpResponse.json(apiCurrentUserFixtures.adminUser, { status: 200 })
+      HttpResponse.json(apiCurrentUserFixtures.adminUser, { status: 200 }),
     ),
     http.get("/api/systemInfo", () =>
-      HttpResponse.json(systemInfoFixtures.showingNeither, { status: 200 })
+      HttpResponse.json(systemInfoFixtures.showingNeither, { status: 200 }),
     ),
     http.post("/api/ucsborganizations/post", () =>
-      HttpResponse.json({}, { status: 200 })
+      HttpResponse.json({}, { status: 200 }),
     ),
   ],
 };
