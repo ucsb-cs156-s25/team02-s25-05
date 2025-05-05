@@ -233,7 +233,6 @@ describe("RecommendationRequestTable tests", () => {
     );
     expect(doneCell2).toHaveTextContent("true");
   });
-
   test("Delete button calls delete callback", async () => {
     // arrange
     const currentUser = currentUserFixtures.adminUser;
