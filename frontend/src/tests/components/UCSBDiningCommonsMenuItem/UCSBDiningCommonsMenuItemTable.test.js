@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { RecommendationRequestFixtures } from "fixtures/recommendationRequestsFixtures";
-import RecommendationRequestTable from "main/components/RecommendationRequests/RecommendationRequestTable";
+import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -14,28 +14,12 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-describe("RecommendationRequestTable tests", () => {
+describe("UCSBDiningCommonsMenuItemTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = [
-    "id",
-    "Requestor Email",
-    "Professor Email",
-    "Explanation",
-    "Date Requested",
-    "Date Needed",
-    "Done",
-  ];
-  const expectedFields = [
-    "id",
-    "requestorEmail",
-    "professorEmail",
-    "explanation",
-    "dateRequested",
-    "dateNeeded",
-    "done",
-  ];
-  const testId = "RecommendationRequestTable";
+  const expectedHeaders = ["id", "Dining Commons", "Name", "Station"];
+  const expectedFields = ["id", "diningCommonsCode", "name", "station"];
+  const testId = "UCSBDiningCommonsMenuItemTable";
 
   test("renders empty table correctly", () => {
     // arrange
@@ -45,8 +29,8 @@ describe("RecommendationRequestTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable
-            recommendationrequests={[]}
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={[]}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -75,10 +59,8 @@ describe("RecommendationRequestTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable
-            recommendationrequests={
-              RecommendationRequestFixtures.threeRecommendationRequest
-            }
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={ucsbDiningCommonsMenuItemFixtures.threeItems}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -97,18 +79,18 @@ describe("RecommendationRequestTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("Portola");
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       "2",
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requestorEmail`),
-    ).toHaveTextContent("kevinlee@ucsb.edu");
-
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      "3",
-    );
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-explanation`),
-    ).toHaveTextContent("Recommendation 2");
+      screen.getByTestId(`${testId}-cell-row-1-col-diningCommonsCode`),
+    ).toHaveTextContent("Carrillo");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -131,10 +113,8 @@ describe("RecommendationRequestTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable
-            recommendationrequests={
-              RecommendationRequestFixtures.threeRecommendationRequest
-            }
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={ucsbDiningCommonsMenuItemFixtures.threeItems}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -153,18 +133,18 @@ describe("RecommendationRequestTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("Portola");
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       "2",
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requestorEmail`),
-    ).toHaveTextContent("kevinlee@ucsb.edu");
-
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      "3",
-    );
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-explanation`),
-    ).toHaveTextContent("Recommendation 2");
+      screen.getByTestId(`${testId}-cell-row-1-col-diningCommonsCode`),
+    ).toHaveTextContent("Carrillo");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -178,10 +158,8 @@ describe("RecommendationRequestTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable
-            recommendationrequests={
-              RecommendationRequestFixtures.threeRecommendationRequest
-            }
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={ucsbDiningCommonsMenuItemFixtures.threeItems}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -191,7 +169,10 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the expected content is rendered
     expect(
       await screen.findByTestId(`${testId}-cell-row-0-col-id`),
-    ).toHaveTextContent("2");
+    ).toHaveTextContent("1");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("chocolate milk");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -204,52 +185,26 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/recommendationrequest/edit/2",
+        "/diningcommonsmenuitem/edit/1",
       ),
     );
   });
 
-  test("dropdown for done can be selected", () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <RecommendationRequestTable
-            recommendationrequests={
-              RecommendationRequestFixtures.threeRecommendationRequest
-            }
-            currentUser={currentUserFixtures.adminUser}
-          />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
-
-    const doneCell = screen.getByTestId(
-      "RecommendationRequestTable-cell-row-0-col-done",
-    );
-    expect(doneCell).toHaveTextContent("false");
-
-    const doneCell2 = screen.getByTestId(
-      "RecommendationRequestTable-cell-row-2-col-done",
-    );
-    expect(doneCell2).toHaveTextContent("true");
-  });
   test("Delete button calls delete callback", async () => {
     // arrange
     const currentUser = currentUserFixtures.adminUser;
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/recommendationrequest")
-      .reply(200, { message: "Recommendation request deleted" });
+      .onDelete("/api/ucsbdiningcommonsmenuitem")
+      .reply(200, { message: "Menu item deleted" });
 
     // act - render the component
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable
-            recommendationrequests={
-              RecommendationRequestFixtures.threeRecommendationRequest
-            }
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={ucsbDiningCommonsMenuItemFixtures.threeItems}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -259,7 +214,10 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the expected content is rendered
     expect(
       await screen.findByTestId(`${testId}-cell-row-0-col-id`),
-    ).toHaveTextContent("2");
+    ).toHaveTextContent("1");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("chocolate milk");
 
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
@@ -272,6 +230,6 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the delete endpoint was called
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-    expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
+    expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });

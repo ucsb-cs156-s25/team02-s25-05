@@ -5,19 +5,19 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/recommendationrequestUtils";
+} from "main/utils/UCSBDiningCommonsMenuItemUtils";
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function RecommendationRequestTable({
-  recommendationrequests,
+export default function UCSBDiningCommonsMenuItemTable({
+  menuItems,
   currentUser,
-  testIdPrefix = "RecommendationRequestTable",
+  testIdPrefix = "UCSBDiningCommonsMenuItemTable",
 }) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/recommendationrequest/edit/${cell.row.values.id}`);
+    navigate(`/diningcommonsmenuitem/edit/${cell.row.values.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -25,7 +25,7 @@ export default function RecommendationRequestTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/recommendationrequest/all"],
+    ["/api/ucsbdiningcommonsmenuitem/all"],
   );
   // Stryker restore all
 
@@ -41,29 +41,16 @@ export default function RecommendationRequestTable({
     },
 
     {
-      Header: "Requestor Email",
-      accessor: "requestorEmail",
+      Header: "Dining Commons",
+      accessor: "diningCommonsCode",
     },
     {
-      Header: "Professor Email",
-      accessor: "professorEmail",
+      Header: "Name",
+      accessor: "name",
     },
     {
-      Header: "Explanation",
-      accessor: "explanation",
-    },
-    {
-      Header: "Date Requested",
-      accessor: "dateRequested",
-    },
-    {
-      Header: "Date Needed",
-      accessor: "dateNeeded",
-    },
-    {
-      Header: "Done",
-      accessor: (row) => String(row.done),
-      id: "done",
+      Header: "Station",
+      accessor: "station",
     },
   ];
 
@@ -74,11 +61,5 @@ export default function RecommendationRequestTable({
     );
   }
 
-  return (
-    <OurTable
-      data={recommendationrequests}
-      columns={columns}
-      testid={testIdPrefix}
-    />
-  );
+  return <OurTable data={menuItems} columns={columns} testid={testIdPrefix} />;
 }
