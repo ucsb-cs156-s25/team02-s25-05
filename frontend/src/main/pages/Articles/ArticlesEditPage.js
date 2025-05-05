@@ -32,11 +32,11 @@ export default function ArticlesEditPage({ storybook = false }) {
       id: article.id,
     },
     data: {
-        title: article.title,
-        url: article.url,
-        explanation: article.explanation,
-        email: article.email,
-        dateAdded: article.dateAdded,
+      title: article.title,
+      url: article.url,
+      explanation: article.explanation,
+      email: article.email,
+      dateAdded: article.dateAdded,
     },
   });
 

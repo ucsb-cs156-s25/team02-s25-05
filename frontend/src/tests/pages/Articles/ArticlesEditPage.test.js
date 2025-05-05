@@ -64,9 +64,7 @@ describe("ArticlesEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit Article");
-      expect(
-        screen.queryByTestId("ArticleForm-title"),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId("ArticleForm-title")).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -125,7 +123,7 @@ describe("ArticlesEditPage tests", () => {
 
       await screen.findByTestId("ArticlesForm-title");
 
-      const idField = screen.getByTestId("ArticlesForm-id")
+      const idField = screen.getByTestId("ArticlesForm-id");
       const titleField = screen.getByTestId("ArticlesForm-title");
       const urlField = screen.getByTestId("Articles-url");
       const explanationField = screen.getByTestId("ArticlesForm-explanation");
@@ -153,7 +151,7 @@ describe("ArticlesEditPage tests", () => {
 
       await screen.findByTestId("ArticlesForm-title");
 
-      const idField = screen.getByTestId("ArticlesForm-id")
+      const idField = screen.getByTestId("ArticlesForm-id");
       const titleField = screen.getByTestId("ArticlesForm-title");
       const urlField = screen.getByTestId("Articles-url");
       const explanationField = screen.getByTestId("ArticlesForm-explanation");
@@ -169,9 +167,11 @@ describe("ArticlesEditPage tests", () => {
       expect(dateAddedField).toHaveValue("2025-02-02T00:00");
       expect(submitButton).toBeInTheDocument();
 
-      fireEvent.change(title, { target: { value: "Different Article" } });
-      fireEvent.change(url, { target: { value: "different.com" } });
-      fireEvent.change(explanation, { target: { value: "A different article" } });
+      fireEvent.change(titleField, { target: { value: "Different Article" } });
+      fireEvent.change(urlField, { target: { value: "different.com" } });
+      fireEvent.change(explanationField, {
+        target: { value: "A different article" },
+      });
 
       fireEvent.click(submitButton);
 
