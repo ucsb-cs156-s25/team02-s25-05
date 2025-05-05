@@ -26,7 +26,7 @@ function ArticlesForm({
   // Stryker restore Regex
 
   // Stryker disable next-line all
-  const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
+  //const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -56,7 +56,7 @@ function ArticlesForm({
               type="text"
               isInvalid={Boolean(errors.title)}
               {...register("title", {
-                required: "Title is required",
+                required: "Title is required.",
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -139,7 +139,7 @@ function ArticlesForm({
               })}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.dateAdded && "dateAdded is required. "}
+              {errors.dateAdded && "dateAdded is required."}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -163,4 +163,4 @@ function ArticlesForm({
   );
 }
 
-export default UCSBDateForm;
+export default ArticlesForm;
