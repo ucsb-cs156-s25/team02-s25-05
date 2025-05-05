@@ -53,13 +53,11 @@ describe("UCSBOrganizationIndexPage tests", () => {
         <MemoryRouter>
           <UCSBOrganizationIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() =>
-      expect(
-        screen.getByText(/Create UCSB Organization/)
-      ).toBeInTheDocument()
+      expect(screen.getByText(/Create UCSB Organization/)).toBeInTheDocument(),
     );
     const button = screen.getByText(/Create UCSB Organization/);
     expect(button).toHaveAttribute("href", "/ucsborganizations/create");
@@ -78,31 +76,31 @@ describe("UCSBOrganizationIndexPage tests", () => {
         <MemoryRouter>
           <UCSBOrganizationIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() =>
       expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)
-      ).toHaveTextContent("foo")
+        screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
+      ).toHaveTextContent("foo"),
     );
 
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)
+      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`),
     ).toHaveTextContent("too");
     expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)
+      screen.getByTestId(`${testId}-cell-row-2-col-orgCode`),
     ).toHaveTextContent("goo");
 
     /* no create / edit / delete buttons for ordinary user */
     expect(
-      screen.queryByText("Create UCSB Organization")
+      screen.queryByText("Create UCSB Organization"),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`)
+      screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`)
+      screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`),
     ).not.toBeInTheDocument();
   });
 
@@ -118,15 +116,15 @@ describe("UCSBOrganizationIndexPage tests", () => {
         <MemoryRouter>
           <UCSBOrganizationIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() =>
-      expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1)
+      expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1),
     );
     const errMsg = console.error.mock.calls[0][0];
     expect(errMsg).toMatch(
-      "Error communicating with backend via GET on /api/ucsborganizations/all"
+      "Error communicating with backend via GET on /api/ucsborganizations/all",
     );
     restoreConsole();
   });
@@ -147,23 +145,23 @@ describe("UCSBOrganizationIndexPage tests", () => {
         <MemoryRouter>
           <UCSBOrganizationIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() =>
       expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)
-      ).toBeInTheDocument()
+        screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
+      ).toBeInTheDocument(),
     );
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`
+      `${testId}-cell-row-0-col-Delete-button`,
     );
     fireEvent.click(deleteButton);
 
     await waitFor(() => expect(mockToast).toBeCalled());
     expect(mockToast).toBeCalledWith(
-      "Organization with orgCode foo was deleted"
+      "Organization with orgCode foo was deleted",
     );
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));

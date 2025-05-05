@@ -5,21 +5,20 @@ import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
 export default function UCSBOrganizationEditPage({ storybook = false }) {
-    const { orgCode } = useParams();
+  const { orgCode } = useParams();
 
   const {
     data: organization,
     _error,
     _status,
   } = useBackend(
-    [`/api/ucsborganizations?orgCode=${orgCode}`],          // query key
+    [`/api/ucsborganizations?orgCode=${orgCode}`], // query key
     {
       method: "GET",
       url: "/api/ucsborganizations",
       params: { orgCode },
-    }
+    },
   );
-
 
   const objectToAxiosPutParams = (org) => ({
     url: "/api/ucsborganizations",
@@ -34,14 +33,14 @@ export default function UCSBOrganizationEditPage({ storybook = false }) {
 
   const onSuccess = (org) => {
     toast(
-      `UCSB Organization Updated - orgCode: ${org.orgCode} short: ${org.orgTranslationShort}`
+      `UCSB Organization Updated - orgCode: ${org.orgCode} short: ${org.orgTranslationShort}`,
     );
   };
 
   const mutation = useBackendMutation(
     objectToAxiosPutParams,
     { onSuccess },
-    [`/api/ucsborganizations?orgCode=${orgCode}`]           // re‑fetch this row
+    [`/api/ucsborganizations?orgCode=${orgCode}`], // re‑fetch this row
   );
 
   const { isSuccess } = mutation;
@@ -50,11 +49,9 @@ export default function UCSBOrganizationEditPage({ storybook = false }) {
     mutation.mutate(data);
   };
 
-
   if (isSuccess && !storybook) {
     return <Navigate to="/ucsborganizations" />;
   }
-
 
   return (
     <BasicLayout>

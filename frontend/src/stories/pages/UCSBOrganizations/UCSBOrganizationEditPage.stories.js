@@ -16,10 +16,10 @@ export const Default = Template.bind({});
 Default.parameters = {
   msw: [
     http.get("/api/currentUser", () =>
-      HttpResponse.json(apiCurrentUserFixtures.userOnly, { status: 200 })
+      HttpResponse.json(apiCurrentUserFixtures.userOnly, { status: 200 }),
     ),
     http.get("/api/systemInfo", () =>
-      HttpResponse.json(systemInfoFixtures.showingNeither, { status: 200 })
+      HttpResponse.json(systemInfoFixtures.showingNeither, { status: 200 }),
     ),
     http.get("/api/ucsborganizations", () =>
       HttpResponse.json(
@@ -29,8 +29,8 @@ Default.parameters = {
           orgTranslation: "College of Engineering",
           inactive: false,
         },
-        { status: 200 }
-      )
+        { status: 200 },
+      ),
     ),
     http.put("/api/ucsborganizations", (req) => {
       window.alert("PUT to " + req.url + " with body: " + req.body);

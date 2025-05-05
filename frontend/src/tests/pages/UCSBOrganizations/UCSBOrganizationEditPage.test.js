@@ -46,9 +46,11 @@ describe("UCSBOrganizationEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsborganizations", {
-        params: { orgCode: "ENGR" },
-      }).timeout();
+      axiosMock
+        .onGet("/api/ucsborganizations", {
+          params: { orgCode: "ENGR" },
+        })
+        .timeout();
     });
 
     test("renders header but form fields not present", async () => {
@@ -59,12 +61,12 @@ describe("UCSBOrganizationEditPage tests", () => {
           <MemoryRouter>
             <UCSBOrganizationEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       await screen.findByText("Edit UCSB Organization");
       expect(
-        screen.queryByTestId("UCSBOrganizationForm-orgCode")
+        screen.queryByTestId("UCSBOrganizationForm-orgCode"),
       ).not.toBeInTheDocument();
 
       restoreConsole();
@@ -85,14 +87,16 @@ describe("UCSBOrganizationEditPage tests", () => {
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
 
-      axiosMock.onGet("/api/ucsborganizations", {
-        params: { orgCode: "ENGR" },
-      }).reply(200, {
-        orgCode: "ENGR",
-        orgTranslationShort: "Engineering",
-        orgTranslation: "College of Engineering",
-        inactive: false,
-      });
+      axiosMock
+        .onGet("/api/ucsborganizations", {
+          params: { orgCode: "ENGR" },
+        })
+        .reply(200, {
+          orgCode: "ENGR",
+          orgTranslationShort: "Engineering",
+          orgTranslation: "College of Engineering",
+          inactive: false,
+        });
 
       axiosMock.onPut("/api/ucsborganizations").reply(200, {
         orgCode: "ENGR",
@@ -108,7 +112,7 @@ describe("UCSBOrganizationEditPage tests", () => {
           <MemoryRouter>
             <UCSBOrganizationEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       /* wait for form to load */
@@ -116,13 +120,13 @@ describe("UCSBOrganizationEditPage tests", () => {
 
       const codeField = screen.getByTestId("UCSBOrganizationForm-orgCode");
       const shortField = screen.getByTestId(
-        "UCSBOrganizationForm-orgTranslationShort"
+        "UCSBOrganizationForm-orgTranslationShort",
       );
       const transField = screen.getByTestId(
-        "UCSBOrganizationForm-orgTranslation"
+        "UCSBOrganizationForm-orgTranslation",
       );
       const inactiveCheckbox = screen.getByTestId(
-        "UCSBOrganizationForm-inactive"
+        "UCSBOrganizationForm-inactive",
       );
       const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
@@ -139,7 +143,7 @@ describe("UCSBOrganizationEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "UCSB Organization Updated - orgCode: ENGR short: Engr"
+        "UCSB Organization Updated - orgCode: ENGR short: Engr",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/ucsborganizations" });
 
@@ -151,7 +155,7 @@ describe("UCSBOrganizationEditPage tests", () => {
           orgTranslationShort: "Engr",
           orgTranslation: "College of Engineering",
           inactive: true,
-        })
+        }),
       );
     });
   });
