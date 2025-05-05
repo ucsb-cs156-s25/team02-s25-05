@@ -15,9 +15,14 @@ import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
 import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
 
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganizations/UCSBOrganizationIndexPage";
+import UCSBOrganizationCreatePage from "main/pages/UCSBOrganizations/UCSBOrganizationCreatePage";
+import UCSBOrganizationEditPage from "main/pages/UCSBOrganizations/UCSBOrganizationEditPage";
+
 import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
 import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
 import MenuItemReviewEditPage from "main/pages/MenuItemReview/MenuItemReviewEditPage";
+
 import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
@@ -154,6 +159,29 @@ function App() {
               exact
               path="/menuitemreview/create"
               element={<MenuItemReviewCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/ucsborganizations"
+              element={<UCSBOrganizationIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/ucsborganizations/edit/:orgCode"
+              element={<UCSBOrganizationEditPage />}
+            />
+            <Route
+              exact
+              path="/ucsborganizations/create"
+              element={<UCSBOrganizationCreatePage />}
             />
           </>
         )}

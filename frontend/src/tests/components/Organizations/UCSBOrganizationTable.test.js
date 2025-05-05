@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
-import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
+import UCSBOrganizationTable from "main/components/UCSBOrganizations/UCSBOrganizationTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
