@@ -48,12 +48,12 @@ export default function ArticlesTable({ articles, currentUser }) {
       accessor: "explanation",
     },
     {
-        Header: "Email",
-        accessor: "email",
+      Header: "Email",
+      accessor: "email",
     },
     {
-        Header: "Date added",
-        accessor: "dateAdded",
+      Header: "Date added",
+      accessor: "dateAdded",
     },
   ];
 
@@ -66,5 +66,7 @@ export default function ArticlesTable({ articles, currentUser }) {
     );
   }
 
-  return <OurTable data={articles} columns={columns} testid={"ArticlesTable"} />;
+  return (
+    <OurTable data={articles} columns={columns} testid={"ArticlesTable"} />
+  );
 }
