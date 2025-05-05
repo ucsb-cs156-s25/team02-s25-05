@@ -1,7 +1,7 @@
 import {
   onDeleteSuccess,
   cellToAxiosParamsDelete,
-} from "main/utils/UCSBOrganizationUtils";
+} from "main/utils/MenuItemReviewUtils";
 import mockConsole from "jest-mock-console";
 
 const mockToast = jest.fn();
@@ -10,34 +10,41 @@ jest.mock("react-toastify", () => {
   return {
     __esModule: true,
     ...originalModule,
-    toast: (msg) => mockToast(msg),
+    toast: (x) => mockToast(x),
   };
 });
 
-describe("UCSBOrganizationUtils", () => {
+describe("MenuItemReviewUtils", () => {
   describe("onDeleteSuccess", () => {
-    test("logs the message and shows a toast", () => {
+    test("It puts the message on console.log and in a toast", () => {
+      // arrange
       const restoreConsole = mockConsole();
 
-      onDeleteSuccess("deleted!");
+      // act
+      onDeleteSuccess("abc");
 
-      expect(mockToast).toHaveBeenCalledWith("deleted!");
+      // assert
+      expect(mockToast).toHaveBeenCalledWith("abc");
       expect(console.log).toHaveBeenCalled();
-      expect(console.log.mock.calls[0][0]).toMatch("deleted!");
+      const message = console.log.mock.calls[0][0];
+      expect(message).toMatch("abc");
 
       restoreConsole();
     });
   });
-
   describe("cellToAxiosParamsDelete", () => {
-    test("returns correct axios params", () => {
-      const cell = { row: { values: { orgCode: "ENGR" } } };
+    test("It returns the correct params", () => {
+      // arrange
+      const cell = { row: { values: { id: 17 } } };
+
+      // act
       const result = cellToAxiosParamsDelete(cell);
 
+      // assert
       expect(result).toEqual({
-        url: "/api/ucsborganizations",
+        url: "/api/menuitemreview",
         method: "DELETE",
-        params: { orgCode: "ENGR" },
+        params: { id: 17 },
       });
     });
   });
