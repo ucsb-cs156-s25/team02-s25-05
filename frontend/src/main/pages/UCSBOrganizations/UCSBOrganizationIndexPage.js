@@ -29,6 +29,7 @@ export default function UCSBOrganizationIndexPage() {
         variant="primary"
         href="/ucsborganizations/create"
         style={{ float: "right" }}
+        data-testid="UCSBOrganizationPage-Create-Button"
       >
         Create UCSB Organization
       </Button>
