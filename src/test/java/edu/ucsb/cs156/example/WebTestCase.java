@@ -20,7 +20,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 @ActiveProfiles("integration")
 public abstract class WebTestCase {
     @LocalServerPort
-    private int port;
+    protected int port; // Made protected so that UCSBOrganizationWebIT can access it
 
     @Value("${app.playwright.headless:true}")
     private boolean runHeadless;
