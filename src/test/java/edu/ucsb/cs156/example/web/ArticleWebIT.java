@@ -45,7 +45,7 @@ public class ArticleWebIT extends WebTestCase {
 
         page.getByTestId("ArticlesTable-cell-row-0-col-Delete-button").click();
 
-        assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-name")).not().isVisible();
+        assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-title")).not().isVisible();
     }
 
     @Test
@@ -55,6 +55,6 @@ public class ArticleWebIT extends WebTestCase {
         page.getByText("Articles").click();
 
         assertThat(page.getByText("Create Article")).not().isVisible();
-        assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-name")).not().isVisible();
+        assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-title")).not().isVisible();
     }
 }
