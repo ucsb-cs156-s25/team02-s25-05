@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s25/team02-s25-05
 owner: ucsb-cs156-s25
 repo_name: team02-s25-05
-pull_requests: [{"author":{"id":"MDQ6VXNlcjY3ODg2NTM4","is_bot":false,"login":"VishalSeeni-108","name":"Vishal S."},"headRefName":"vs-team03","number":129,"title":"Integration tests for Articles","url":"https://github.com/ucsb-cs156-s25/team02-s25-05/pull/129"},{"author":{"id":"MDQ6VXNlcjY1MDkyNjE2","is_bot":false,"login":"jiwa310","name":"Jim Wang"},"headRefName":"jiwa310-UCSBOrg-integration-and-end2end","number":126,"title":"jiwa310 Integration tests and end2end tests","url":"https://github.com/ucsb-cs156-s25/team02-s25-05/pull/126"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjY3ODg2NTM4","is_bot":false,"login":"VishalSeeni-108","name":"Vishal S."},"headRefName":"vs-team03","number":129,"title":"Integration tests for Articles","url":"https://github.com/ucsb-cs156-s25/team02-s25-05/pull/129"}]
